@@ -2,27 +2,23 @@
 
 namespace Database\Seeders;
 
-
-
-
-use App\Models\Category;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
-
-class DatabaseSeeder extends Seeder
+class VaultSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(100)->create()->each(function ($user) {
+        // Fetch all users and create categories for each
+        User::all()->each(function ($user) {
+            // Adjust the number of categories per user as needed
             Category::factory()->count(3)->create([
                 'user_id' => $user->id,
             ]);
         });
-
-        $this->call(PasswordSeeder::class);
     }
 }
