@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-
-
-
-use App\Models\Category;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,12 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)->create()->each(function ($user) {
-            Category::factory()->count(3)->create([
-                'user_id' => $user->id,
+        User::factory(100)->create();
+
+        Category::factory(10)->create()->each(function ($category) {
+            Product::factory(10)->create([
+                'category_id' => $category->id,
             ]);
         });
-
-        $this->call(PasswordSeeder::class);
     }
 }

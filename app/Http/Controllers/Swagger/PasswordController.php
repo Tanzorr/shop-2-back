@@ -20,7 +20,7 @@ class PasswordController
      *         @OA\JsonContent(
      *             type="array",
      *
-     *             @OA\Items(ref="#/components/schemas/Password")
+     *             @OA\Items(ref="#/components/schemas/Product")
      *         )
      *     )
      * )
@@ -42,11 +42,11 @@ class PasswordController
      *
      *     @OA\Response(
      *         response=201,
-     *         description="Password created successfully",
+     *         description="Product created successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password created successfully")
+     *             @OA\Property(property="message", type="string", example="Product created successfully")
      *         )
      *     )
      * )
@@ -64,16 +64,16 @@ class PasswordController
      *         name="password",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password details",
+     *         description="Product details",
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Password")
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
      *     )
      * )
      */
@@ -90,7 +90,7 @@ class PasswordController
      *         name="password",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
@@ -98,16 +98,16 @@ class PasswordController
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Password")
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password updated successfully",
+     *         description="Product updated successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password updated successfully")
+     *             @OA\Property(property="message", type="string", example="Product updated successfully")
      *         )
      *     )
      * )
@@ -125,18 +125,18 @@ class PasswordController
      *         name="password",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password deleted successfully",
+     *         description="Product deleted successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password deleted successfully")
+     *             @OA\Property(property="message", type="string", example="Product deleted successfully")
      *         )
      *     )
      * )

@@ -3,29 +3,17 @@
 namespace App\Models;
 
 
-use App\Scopes\UserVaultScope;
+use App\Scopes\UserCategoryScope;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticated;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-/**
- * @OA\Schema(
- *     schema="User",
- *     type="object",
- *     @OA\Property(property="id", type="integer"),
- *     @OA\Property(property="name", type="string"),
- *     @OA\Property(property="email", type="string"),
- *     @OA\Property(property="created_at", type="string", format="date-time"),
- *     @OA\Property(property="updated_at", type="string", format="date-time")
- * )
- */
-class User extends Authenticatable
+class User extends Authenticated
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -43,7 +31,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $appends = ['ownVaults', 'sharedVaults', 'media',];
+    protected $appends = ['media',];
 
     public function scopeFilterBySearch(Builder $query, $search = ''): Builder
     {
@@ -62,7 +50,7 @@ class User extends Authenticatable
 
     public function categories(): HasMany
     {
-        return $this->hasMany(Category::class)->withoutGlobalScope(UserVaultScope::class);
+        return $this->hasMany(Category::class)->withoutGlobalScope(UserCategoryScope::class);
     }
 
     public function sharedVaultsRelation(): HasManyThrough
@@ -83,23 +71,12 @@ class User extends Authenticatable
             ]);
     }
 
-    public function getOwnVaultsAttribute(): Collection
-    {
-        return $this->categories()->get();
-    }
-
-    public function getSharedVaultsAttribute()
-    {
-        return $this->sharedVaultsRelation()->get();
-    }
-
-    public function media(): MorphToMany
-    {
-        return $this->morphToMany(Media::class, 'mediable', 'media_relations');
-    }
-
     public function getMediaAttribute()
     {
         return $this->media()->get();
+    }
+    public function media(): MorphToMany
+    {
+        return $this->morphToMany(Media::class, 'mediable', 'media_relations');
     }
 }

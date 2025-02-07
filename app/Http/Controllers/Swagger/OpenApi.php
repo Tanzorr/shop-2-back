@@ -126,7 +126,7 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Schema(
- *     schema="Password",
+ *     schema="Product",
  *     type="object",
  *
  *     @OA\Property(property="id", type="integer", example=1),

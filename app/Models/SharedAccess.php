@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
+ *
  *
  * @property-read Model|\Eloquent $accessible
  * @property-read \App\Models\TFactory|null $use_factory
@@ -22,11 +22,10 @@ class SharedAccess extends Model
 {
     use HasFactory;
 
-    const VAULT_TYPE = 'App\\Models\\Category';
 
     const ACCESS_TYPE_MAP = [
-        'VaultModel' => 'App\\Models\\Category',
-        'PasswordModel' => 'App\\Models\\Password',
+        'CategoryModel' => 'App\\Models\\Category',
+        'PasswordModel' => 'App\\Models\\Product',
     ];
 
     protected $fillable = [

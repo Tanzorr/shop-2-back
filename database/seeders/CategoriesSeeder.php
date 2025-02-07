@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
-class VaultSeeder extends Seeder
+class CategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

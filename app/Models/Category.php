@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Scopes\UserVaultScope;
+
+use App\Scopes\UserCategoryScope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 /**
  *
  *
- * @property-read \App\Models\TFactory|null $use_factory
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Password> $passwords
+ * @property-read TFactory|null $use_factory
+ * @property-read Collection<int, Product> $passwords
  * @property-read int|null $passwords_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SharedAccess> $sharedAccess
+ * @property-read Collection<int, SharedAccess> $sharedAccess
  * @property-read int|null $shared_access_count
  * @method static Builder<static>|Category filterBySearch($search = '')
  * @method static Builder<static>|Category newModelQuery()
@@ -33,8 +33,7 @@ class Category extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'description',
-        'is_shared',
+        'description'
     ];
 
     public function scopeFilterBySearch(Builder $query, $search = ''): Builder
@@ -47,9 +46,9 @@ class Category extends Model
         return $query;
     }
 
-    public function passwords(): HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(Password::class);
+        return $this->hasMany(Product::class);
     }
 
     public function sharedAccess(): MorphMany
@@ -64,13 +63,8 @@ class Category extends Model
             ->select(['users.*', 'shared_accesses.id as shared_access_id']);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     protected static function booted(): void
     {
-        static::addGlobalScope(new UserVaultScope);
+        static::addGlobalScope(new UserCategoryScope);
     }
 }
