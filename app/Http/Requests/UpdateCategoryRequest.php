@@ -24,7 +24,6 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'user_id' => 'required',
             'name' => 'required',
             'description' => 'nullable',
         ];

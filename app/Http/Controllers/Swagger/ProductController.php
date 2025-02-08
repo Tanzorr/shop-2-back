@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Swagger;
 
-class PasswordController
+class ProductController
 {
     /**
      * @OA\Get(
-     *     path="/api/passwords",
-     *     tags={"Passwords"},
-     *     summary="Get a list of passwords for a specific vault",
+     *     path="/api/products",
+     *     tags={"Products"},
+     *     summary="Get a list of products",
      *     security={{"bearerAuth": {}}},
-     *     operationId="getPasswords",
+     *     operationId="getProducts",
      *
      *
      *     @OA\Response(
      *         response=200,
-     *         description="List of passwords",
+     *         description="List of products",
      *
      *         @OA\JsonContent(
      *             type="array",
@@ -29,15 +29,15 @@ class PasswordController
 
     /**
      * @OA\Post(
-     *     path="/api/passwords",
-     *     tags={"Passwords"},
-     *     summary="Create a new password",
+     *     path="/api/products",
+     *     tags={"Products"},
+     *     summary="Create a new product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\RequestBody(
      *          required=true,
      *
-     *          @OA\JsonContent(ref="#/components/schemas/StorePasswordRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/StoreProductsRequest")
      *     ),
      *
      *     @OA\Response(
@@ -55,13 +55,13 @@ class PasswordController
 
     /**
      * @OA\Get(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
      *     security={{"bearerAuth": {}}},
-     *     summary="Get details of a specific password",
+     *     summary="Get details of a specific product",
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
      *         description="Product ID",
@@ -81,13 +81,13 @@ class PasswordController
 
     /**
      * @OA\Put(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
-     *     summary="Update a password",
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
+     *     summary="Update a product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
      *         description="Product ID",
@@ -116,13 +116,13 @@ class PasswordController
 
     /**
      * @OA\Delete(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
-     *     summary="Delete a password",
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
+     *     summary="Delete a product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
      *         description="Product ID",

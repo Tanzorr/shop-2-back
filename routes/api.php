@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EntityMediaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SharedAccessController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
@@ -16,7 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::apiResource('users', UserController::class)->only(['index', 'show']);
     Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('passwords', PasswordController::class);
+    Route::apiResource('products', ProductController::class);
     Route::apiResource('/shared-accesses', SharedAccessController::class);
     Route::get(
         '/users/not-access/{entity}/{entityId}',

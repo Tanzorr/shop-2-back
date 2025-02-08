@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Category;
-use App\Models\Models\User;
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 trait ResolvesEntities
 {
     public array $entityMap = [
-        'vault' => Category::class,
+        'category' => Category::class,
         'password' => Product::class,
         'user' => User::class,
     ];

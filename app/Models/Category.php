@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
- *
+ * 
  *
  * @property-read TFactory|null $use_factory
  * @property-read Collection<int, Product> $passwords
@@ -24,6 +24,19 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @method static Builder<static>|Category newModelQuery()
  * @method static Builder<static>|Category newQuery()
  * @method static Builder<static>|Category query()
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Category whereCreatedAt($value)
+ * @method static Builder<static>|Category whereDescription($value)
+ * @method static Builder<static>|Category whereId($value)
+ * @method static Builder<static>|Category whereName($value)
+ * @method static Builder<static>|Category whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Category extends Model

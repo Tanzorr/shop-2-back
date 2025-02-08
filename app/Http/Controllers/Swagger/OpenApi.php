@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 /**
  * @OA\Info(
- *     title="Pass Manager API",
+ *     title="Shop API",
  *     version="1.0.0",
- *     description="API documentation for Pass Manager application",
+ *     description="API documentation for Shop application",
  *
  *     @OA\Contact(
  *         email="support@example.com"
@@ -47,41 +47,38 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Tag(
- *     name="Vault",
- *     description="Operations related to vault management"
+ *     name="Categories",
+ *     description="Operations related to categories management"
  * )
  *
  * @OA\Schema(
- *     schema="Vault",
+ *     schema="Category",
  *     type="object",
- *     required={"id", "user_id", "name", "description", "created_at", "updated_at"},
+ *     required={"id", "name", "description", "created_at", "updated_at"},
  *
  *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="name", type="string", example="Vault 1"),
- *     @OA\Property(property="description", type="string", example="Personal vault"),
+ *     @OA\Property(property="name", type="string", example="Category 1"),
+ *     @OA\Property(property="description", type="string", example="category description"),
  *     @OA\Property(property="is_shared", type="boolean", example=true),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2024-01-01T12:00:00Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2024-01-01T12:30:00Z")
  * )
  *
  * @OA\Schema(
- *      schema="StoreVaultRequest",
+ *      schema="StoreCategoryRequest",
  *      type="object",
  *
- *      @OA\Property(property="name", type="string", example="Updated Vault Name"),
+ *      @OA\Property(property="name", type="string", example="Updated Category Name"),
  *      @OA\Property(property="description", type="string", example="Updated description"),
- *      @OA\Property(property="user_id", type="intager", example=11)
  *  )
  *
  * @OA\Schema(
- *       schema="UpdateVaultRequest",
+ *       schema="UpdateCategoryRequest",
  *       type="object",
  *
  *       @OA\Property (property="id", type="integer", example=1),
- *       @OA\Property(property="name", type="string", example="Updated Vault Name"),
+ *       @OA\Property(property="name", type="string", example="Updated Category Name"),
  *       @OA\Property(property="description", type="string", example="Updated description"),
- *       @OA\Property(property="user_id", type="intager", example=11)
  *   )
  *
  * @OA\Tag(
@@ -121,8 +118,8 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Tag(
- *     name="Passwords",
- *     description="API Endpoints for managing passwords"
+ *     name="Products",
+ *     description="API Endpoints for managing products"
  * )
  *
  * @OA\Schema(
@@ -130,21 +127,28 @@ use App\Http\Controllers\Controller;
  *     type="object",
  *
  *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="vault_id", type="integer", example=1),
+ *     @OA\Property(property="category_id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="Facebook"),
- *     @OA\Property(property="value", type="string", example="johndoe"),
+ *     @OA\Property(property="description", type="string", example="description"),
+ *     @OA\Property(property="price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="stock", type="integer", example=10),
+ *     @OA\Property(property="sku", type="string", example="SKU-12345"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
  * )
  *
  * @OA\Schema(
- *     schema="StorePasswordRequest",
+ *     schema="StoreProductsRequest",
  *     type="object",
  *
- *     @OA\Property(property="vault_id", type="integer", example=1),
+ *     @OA\Property(property="category_id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="Facebook"),
- *     @OA\Property(property="value", type="string", example="johndoe"),
- *     @OA\Property(property="description", type="string", example="My Facebook password")
+ *     @OA\Property(property="description", type="string", example="My Facebook password"),
+ *     @OA\Property(property="price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="stock", type="integer", example=10),
+ *     @OA\Property(property="sku", type="string", example="SKU-12345"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
  * )
  *
  * @OA\Tag (
@@ -158,7 +162,7 @@ use App\Http\Controllers\Controller;
  *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
  *     @OA\Property(property="expires_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
@@ -170,7 +174,7 @@ use App\Http\Controllers\Controller;
  *     type="object",
  *
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
  *     @OA\Property(property="expires_at", type="string", format="date-time", example="2026-08-01T00:00:00.000000Z"),
  *     )
@@ -182,7 +186,7 @@ use App\Http\Controllers\Controller;
  *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
  *     @OA\Property(property="expires_at", type="string", format="date-time", example="2028-08-01T00:00:00.000000Z"),
  *     )
