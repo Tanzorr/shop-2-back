@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 
@@ -24,7 +24,7 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function update(UpdatePasswordRequest $request, Product $product): JsonResponse
+    public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
         return response()->json($product->update($request->validated()));
     }

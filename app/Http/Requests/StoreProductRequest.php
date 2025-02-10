@@ -31,8 +31,7 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'string',
                 'min:2',
-                'max:255',
-                Rule::unique('products', 'name')->where('vault_id', $this->vault_id),
+                'max:255'
             ],
             'description' => [
                 'nullable',
