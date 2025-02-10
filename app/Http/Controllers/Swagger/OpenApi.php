@@ -152,6 +152,45 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Tag (
+ *     name="Orders",
+ *     description="API Endpoints for managing orders"
+ * )
+ *
+ * @OA\Schema(
+ *     schema="Order",
+ *     type="object",
+ *
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="user_id", type="integer", example=1),
+ *     @OA\Property(property="status", type="string", example="pending"),
+ *     @OA\Property(property="total_price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="payment_status", type="string", example="pending"),
+ *     @OA\Property(property="payment_method", type="string", example="cash"),
+ *     @OA\Property(property="shipping_address", type="string", example="123 Main St, New York, NY 10030"),
+ *     @OA\Property(property="billing_address", type="string", example="123 Main St, New York, NY 10030"),
+ *     @OA\Property(property="notes", type="string", example="Please deliver before 5pm"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *     @OA\Property(property="updated_at", type="string" format+"date-tiem", example="2021-08-01T00:00:00.000000Z")
+ * )
+ *
+ * @OA\Schema(
+ *    schema="StoreOrderRequest",
+ *    type="object",
+ *    required={"user_id", "status", "total_price", "payment_status", "shipping_address", "items"},
+ *
+ *    @OA\Property(property="user_id", type="integer", example=1),
+ *    @OA\Property(property="status", type="string", example="pending"),
+ *    @OA\Property(property="total_price", type="number", format="float", example=100.00),
+ *    @OA\Property(property="payment_status", type="string", example="pending"),
+ *    @OA\Property(property="payment_method", type="string", example="cash"),
+ *    @OA\Property(property="shipping_address", type="string", example="123 Main St, New York, NY 10030"),
+ *    @OA\Property(property="billing_address", type="string", example="123 Main St, New York, NY 10030"),
+ *    @OA\Property(property="notes", type="string", example="Please deliver before 5pm"),
+ *    @OA\Property(property="items", type="array", @OA\Items(ref="#/components/schemas/OrderItem"))
+ * )
+ *
+ *
+ * @OA\Tag (
  *     name="SharedAccess",
  *     description="Operations related to shared access management"
  * )
