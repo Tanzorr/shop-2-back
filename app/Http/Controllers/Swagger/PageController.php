@@ -116,7 +116,7 @@ class PageController
      *     @OA\RequestBody(
      *        required=true,
      *
-     *        @OA\JsonContent(ref="#/components/schemas/UpadtePageRequest")
+     *        @OA\JsonContent(ref="#/components/schemas/Page")
      *     ),
      *
      *     @OA\Response(

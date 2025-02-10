@@ -87,7 +87,7 @@ class OrderController
      *
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateOrderRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/Order")
      *     ),
      *
      *     @OA\Response(

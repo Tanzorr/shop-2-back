@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -14,24 +15,11 @@ class OrderController extends Controller
         return response()->json(Order::with('items')->get());
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(StoreOrderRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'status' => 'required|in:pending,processing,shipped,delivered,canceled',
-            'total_price' => 'required|numeric',
-            'payment_status' => 'required|in:pending,paid,failed',
-            'shipping_address' => 'required|string',
-            'billing_address' => 'nullable|string',
-            'items' => 'required|array',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
-            'items.*.price' => 'required|numeric|min:0',
-        ]);
+        $order = Order::create($request->validated());
 
-        $order = Order::create($validated);
-
-        foreach ($validated['items'] as $item) {
+        foreach ($request->items as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
@@ -48,18 +36,9 @@ class OrderController extends Controller
         return response()->json($order->load('items'));
     }
 
-    public function update(Request $request, Order $order): JsonResponse
+    public function update(UpdateOrderRequest $request, Order $order): JsonResponse
     {
-        $validated = $request->validate([
-            'status' => 'in:pending,processing,shipped,delivered,canceled',
-            'payment_status' => 'in:pending,paid,failed',
-            'total_price' => 'numeric|min:0',
-            'shipping_address' => 'string',
-            'billing_address' => 'nullable|string',
-            'notes' => 'nullable|string',
-        ]);
-
-        $order->update($validated);
+        $order->update($request->validated());
 
         return response()->json($order);
     }

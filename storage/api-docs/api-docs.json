@@ -512,6 +512,192 @@
                 ]
             }
         },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get a list of orders",
+                "operationId": "getOrders",
+                "responses": {
+                    "200": {
+                        "description": "List of orders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Order"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create a new order",
+                "operationId": "114b8825b604f826eb9123a99dd360c0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get details of a specific order",
+                "operationId": "2264c8c11bfd386ac3cfc3ed5e792218",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update an order",
+                "operationId": "07963af8937ce86423453b12ee132643",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete an order",
+                "operationId": "e10a3f892d53bffd26b24df922c7f723",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Order deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/pages": {
             "get": {
                 "tags": [
@@ -665,7 +851,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpadtePageRequest"
+                                "$ref": "#/components/schemas/Page"
                             }
                         }
                     }
@@ -1419,7 +1605,7 @@
                 },
                 "type": "object"
             },
-            "UpadtePageRequest": {
+            "UpdatePageRequest": {
                 "properties": {
                     "id": {
                         "type": "integer",
@@ -1566,6 +1752,48 @@
                     "sku": {
                         "type": "string",
                         "example": "SKU-12345"
+                    }
+                },
+                "type": "object"
+            },
+            "Order": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "total_price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 100
+                    },
+                    "payment_status": {
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "payment_method": {
+                        "type": "string",
+                        "example": "cash"
+                    },
+                    "shipping_address": {
+                        "type": "string",
+                        "example": "123 Main St, New York, NY 10030"
+                    },
+                    "billing_address": {
+                        "type": "string",
+                        "example": "123 Main St, New York, NY 10030"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "Please deliver before 5pm"
                     },
                     "created_at": {
                         "type": "string",
@@ -1576,6 +1804,81 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2021-08-01T00:00:00.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreOrderRequest": {
+                "required": [
+                    "user_id",
+                    "status",
+                    "total_price",
+                    "payment_status",
+                    "shipping_address",
+                    "items"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "total_price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 100
+                    },
+                    "payment_status": {
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "payment_method": {
+                        "type": "string",
+                        "example": "cash"
+                    },
+                    "shipping_address": {
+                        "type": "string",
+                        "example": "123 Main St, New York, NY 10030"
+                    },
+                    "billing_address": {
+                        "type": "string",
+                        "example": "123 Main St, New York, NY 10030"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "Please deliver before 5pm"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OrderItem"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OrderItem": {
+                "required": [
+                    "product_id",
+                    "quantity",
+                    "price"
+                ],
+                "properties": {
+                    "product_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 100
                     }
                 },
                 "type": "object"
@@ -1723,46 +2026,43 @@
                         "type": "integer",
                         "example": 1
                     },
-                    "name": {
-                        "type": "string",
-                        "example": "John Doe"
-                    },
                     "email": {
                         "type": "string",
-                        "example": "example@ukr.net"
+                        "example": "admin@example.com"
                     },
-                    "password": {
+                    "name": {
                         "type": "string",
-                        "example": "password"
+                        "example": "Admin User"
                     },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2021-09-01T12:00:00"
+                        "example": "2021-08-01T00:00:00.000000Z"
                     },
                     "updated_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2021-09-01T12:00:00"
+                        "example": "2021-08-01T00:00:00.000000Z"
                     }
                 },
                 "type": "object"
             },
             "StoreUserRequest": {
+                "required": [
+                    "email",
+                    "name",
+                    "password"
+                ],
                 "properties": {
-                    "name": {
-                        "type": "string",
-                        "example": "John Doe"
-                    },
                     "email": {
                         "type": "string",
-                        "example": "example@gmail.com"
+                        "example": "test#example.com"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Test User"
                     },
                     "password": {
-                        "type": "string",
-                        "example": "password"
-                    },
-                    "password_confirmation": {
                         "type": "string",
                         "example": "password"
                     }
@@ -1791,6 +2091,10 @@
         {
             "name": "Products",
             "description": "API Endpoints for managing products"
+        },
+        {
+            "name": "Orders",
+            "description": "API Endpoints for managing orders"
         },
         {
             "name": "SharedAccess",
