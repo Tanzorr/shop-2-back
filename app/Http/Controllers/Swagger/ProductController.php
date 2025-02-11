@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Swagger;
 
-class PasswordController
+class ProductController
 {
     /**
      * @OA\Get(
-     *     path="/api/passwords",
-     *     tags={"Passwords"},
-     *     summary="Get a list of passwords for a specific vault",
+     *     path="/api/products",
+     *     tags={"Products"},
+     *     summary="Get a list of products",
      *     security={{"bearerAuth": {}}},
-     *     operationId="getPasswords",
+     *     operationId="getProducts",
      *
      *
      *     @OA\Response(
      *         response=200,
-     *         description="List of passwords",
+     *         description="List of products",
      *
      *         @OA\JsonContent(
      *             type="array",
      *
-     *             @OA\Items(ref="#/components/schemas/Password")
+     *             @OA\Items(ref="#/components/schemas/Product")
      *         )
      *     )
      * )
@@ -29,24 +29,24 @@ class PasswordController
 
     /**
      * @OA\Post(
-     *     path="/api/passwords",
-     *     tags={"Passwords"},
-     *     summary="Create a new password",
+     *     path="/api/products",
+     *     tags={"Products"},
+     *     summary="Create a new product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\RequestBody(
      *          required=true,
      *
-     *          @OA\JsonContent(ref="#/components/schemas/StorePasswordRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/StoreProductsRequest")
      *     ),
      *
      *     @OA\Response(
      *         response=201,
-     *         description="Password created successfully",
+     *         description="Product created successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password created successfully")
+     *             @OA\Property(property="message", type="string", example="Product created successfully")
      *         )
      *     )
      * )
@@ -55,25 +55,25 @@ class PasswordController
 
     /**
      * @OA\Get(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
      *     security={{"bearerAuth": {}}},
-     *     summary="Get details of a specific password",
+     *     summary="Get details of a specific product",
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password details",
+     *         description="Product details",
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Password")
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
      *     )
      * )
      */
@@ -81,16 +81,16 @@ class PasswordController
 
     /**
      * @OA\Put(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
-     *     summary="Update a password",
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
+     *     summary="Update a product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
@@ -98,16 +98,16 @@ class PasswordController
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Password")
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password updated successfully",
+     *         description="Product updated successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password updated successfully")
+     *             @OA\Property(property="message", type="string", example="Product updated successfully")
      *         )
      *     )
      * )
@@ -116,27 +116,27 @@ class PasswordController
 
     /**
      * @OA\Delete(
-     *     path="/api/passwords/{password}",
-     *     tags={"Passwords"},
-     *     summary="Delete a password",
+     *     path="/api/products/{product}",
+     *     tags={"Products"},
+     *     summary="Delete a product",
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
-     *         name="password",
+     *         name="product",
      *         in="path",
      *         required=true,
-     *         description="Password ID",
+     *         description="Product ID",
      *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Password deleted successfully",
+     *         description="Product deleted successfully",
      *
      *         @OA\JsonContent(
      *
-     *             @OA\Property(property="message", type="string", example="Password deleted successfully")
+     *             @OA\Property(property="message", type="string", example="Product deleted successfully")
      *         )
      *     )
      * )

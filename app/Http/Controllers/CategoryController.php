@@ -20,22 +20,22 @@ class CategoryController extends Controller
     {
         Category::create($request->validated());
 
-        return response()->json(['message' => 'Vault created successfully'], 201);
+        return response()->json(['message' => 'Category created successfully'], 201);
     }
-    public function show(Category $vault): JsonResponse
+    public function show(Category $category): JsonResponse
     {
-        return response()->json($vault->load(['passwords', 'sharedAccess', 'accessedUsers']));
-    }
-
-    public function update(UpdateCategoryRequest $request, Category $vault): JsonResponse
-    {
-        $vault->update($request->validated());
-
-        return response()->json(['message' => 'Vault updated successfully']);
+        return response()->json($category);
     }
 
-    public function destroy(Category $vault): JsonResponse
+    public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
     {
-        return response()->json(null, $vault->delete() ? 200 : 404);
+        $category->update($request->validated());
+
+        return response()->json(['message' => 'Category updated successfully']);
+    }
+
+    public function destroy(Category $category): JsonResponse
+    {
+        return response()->json(null, $category->delete() ? 200 : 404);
     }
 }

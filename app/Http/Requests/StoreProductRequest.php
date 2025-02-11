@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StorePasswordRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,12 +17,12 @@ class StorePasswordRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
-            'vault_id' => [
+            'category_id' => [
                 'required',
                 'integer',
                 'exists:categories,id',
@@ -33,21 +31,30 @@ class StorePasswordRequest extends FormRequest
                 'required',
                 'string',
                 'min:2',
-                'max:255',
-                Rule::unique('passwords')->where(function ($query) {
-                    return $query->where('vault_id', $this->vault_id);
-                }),
-            ],
-            'value' => [
-                'required',
-                'string',
-                'min:4',
+                'max:255'
             ],
             'description' => [
                 'nullable',
                 'string',
                 'max:1000',
             ],
+            'price' => [
+                'required',
+                'numeric',
+                'min:0.01',
+            ],
+            'stock' => [
+                'required',
+                'integer',
+                'min:0',
+            ],
+            'sku' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('products', 'sku'),
+            ],
         ];
     }
 }
+

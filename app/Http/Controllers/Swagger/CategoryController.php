@@ -7,28 +7,26 @@ class CategoryController
     /**
      * @OA\Post(
      *     path="/api/categories",
-     *     summary="Create a new vault",
-     *     operationId="createVault",
-     *     tags={"Vault"},
+     *     summary="Create a new category",
+     *     operationId="createCategory",
+     *     tags={"Category"},
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreVaultRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/StoreCategoryRequest")
      *     ),
      *
      *     @OA\Response(
      *         response=201,
-     *         description="Vault created successfully",
+     *         description="Category created successfully",
      *
      *         @OA\JsonContent(
      *             type="object",
      *
-     *             @OA\Property(property="user_id", type="integer", example=1),
      *             @OA\Property(property="name", type="string", example="John Doe"),
-     *             @OA\Property(property="description", type="string", example="John Doe's vault"),
-     *             @OA\Property(property="is_shared", type="boolean", example=false)
+     *             @OA\Property(property="description", type="string", example="John Doe's category"),
      *         )
      *     ),
      *
@@ -50,8 +48,8 @@ class CategoryController
      * @OA\Get(
      *     path="/api/categories",
      *     summary="Get all categories",
-     *     operationId="getVaults",
-     *     tags={"Vault"},
+     *     operationId="getCategories",
+     *     tags={"Category"},
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Response(
@@ -60,7 +58,7 @@ class CategoryController
      *
      *         @OA\JsonContent(
      *             type="array",
-     *            @OA\Items(ref="#/components/schemas/Vault")
+     *            @OA\Items(ref="#/components/schemas/Category")
      *         )
      *     )
      * )
@@ -70,15 +68,15 @@ class CategoryController
     /**
      * @OA\Get(
      *     path="/api/categories/{id}",
-     *     summary="Get a single vault",
-     *     operationId="getVault",
-     *     tags={"Vault"},
+     *     summary="Get a single category",
+     *     operationId="getCategory",
+     *     tags={"Category"},
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the vault",
+     *         description="ID of the category",
      *         required=true,
      *
      *         @OA\Schema(type="integer", example=1)
@@ -86,9 +84,9 @@ class CategoryController
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Vault details",
+     *         description="Category details",
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Vault")
+     *         @OA\JsonContent(ref="#/components/schemas/Category")
      *     )
      * )
      */
@@ -97,15 +95,15 @@ class CategoryController
     /**
      * @OA\Put(
      *     path="/api/categories/{id}",
-     *     summary="Update a vault",
-     *     operationId="updateVault",
-     *     tags={"Vault"},
+     *     summary="Update a category",
+     *     operationId="updateCategory",
+     *     tags={"Category"},
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the vault",
+     *         description="ID of the category",
      *         required=true,
      *
      *         @OA\Schema(type="integer", example=1)
@@ -114,12 +112,12 @@ class CategoryController
      *     @OA\RequestBody(
      *         required=true,
      *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateVaultRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateCategoryRequest")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Vault updated successfully"
+     *         description="Category updated successfully"
      *     )
      * )
      */
@@ -128,15 +126,15 @@ class CategoryController
     /**
      * @OA\Delete(
      *     path="/api/categories/{id}",
-     *     summary="Delete a vault",
-     *     operationId="deleteVault",
-     *     tags={"Vault"},
+     *     summary="Delete a category",
+     *     operationId="deleteCategory",
+     *     tags={"Category"},
      *     security={{"bearerAuth": {}}},
      *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the vault",
+     *         description="ID of the category",
      *         required=true,
      *
      *         @OA\Schema(type="integer", example=1)
@@ -144,7 +142,7 @@ class CategoryController
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Vault deleted successfully"
+     *         description="Category deleted successfully"
      *     )
      * )
      */

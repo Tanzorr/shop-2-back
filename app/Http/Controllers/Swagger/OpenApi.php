@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 /**
  * @OA\Info(
- *     title="Pass Manager API",
+ *     title="Shop API",
  *     version="1.0.0",
- *     description="API documentation for Pass Manager application",
+ *     description="API documentation for Shop application",
  *
  *     @OA\Contact(
  *         email="support@example.com"
@@ -47,42 +47,39 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Tag(
- *     name="Vault",
- *     description="Operations related to vault management"
+ *     name="Categories",
+ *     description="Operations related to categories management"
  * )
  *
  * @OA\Schema(
- *     schema="Vault",
+ *     schema="Category",
  *     type="object",
- *     required={"id", "user_id", "name", "description", "created_at", "updated_at"},
+ *     required={"id", "name", "description", "created_at", "updated_at"},
  *
  *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="name", type="string", example="Vault 1"),
- *     @OA\Property(property="description", type="string", example="Personal vault"),
+ *     @OA\Property(property="name", type="string", example="Category 1"),
+ *     @OA\Property(property="description", type="string", example="category description"),
  *     @OA\Property(property="is_shared", type="boolean", example=true),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2024-01-01T12:00:00Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2024-01-01T12:30:00Z")
  * )
  *
  * @OA\Schema(
- *      schema="StoreVaultRequest",
+ *      schema="StoreCategoryRequest",
  *      type="object",
  *
- *      @OA\Property(property="name", type="string", example="Updated Vault Name"),
- *      @OA\Property(property="description", type="string", example="Updated description"),
- *      @OA\Property(property="user_id", type="intager", example=11)
- *  )
+ *      @OA\Property(property="name", type="string", example="Updated Category Name"),
+ *      @OA\Property(property="description", type="string", example="Updated description")
+ * )
  *
  * @OA\Schema(
- *       schema="UpdateVaultRequest",
+ *       schema="UpdateCategoryRequest",
  *       type="object",
  *
- *       @OA\Property (property="id", type="integer", example=1),
- *       @OA\Property(property="name", type="string", example="Updated Vault Name"),
- *       @OA\Property(property="description", type="string", example="Updated description"),
- *       @OA\Property(property="user_id", type="intager", example=11)
- *   )
+ *       @OA\Property(property="id", type="integer", example=1),
+ *       @OA\Property(property="name", type="string", example="Updated Category Name"),
+ *       @OA\Property(property="description", type="string", example="Updated description")
+ * )
  *
  * @OA\Tag(
  *     name="Page",
@@ -90,14 +87,14 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Schema(
- *     schema="UpadtePageRequest",
+ *     schema="UpdatePageRequest",
  *     type="object",
  *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="author_id", type="integer", example=1),
  *     @OA\Property(property="title", type="string", example="Page title"),
- *     @OA\Property(property="content", type="string", example="Page content"),
- *     )
+ *     @OA\Property(property="content", type="string", example="Page content")
+ * )
  *
  * @OA\Schema(
  *     schema="StorePageRequest",
@@ -105,8 +102,8 @@ use App\Http\Controllers\Controller;
  *
  *     @OA\Property(property="author_id", type="integer", example=1),
  *     @OA\Property(property="title", type="string", example="Page title"),
- *     @OA\Property(property="content", type="string", example="Page content"),
- *     )
+ *     @OA\Property(property="content", type="string", example="Page content")
+ * )
  *
  * @OA\Schema(
  *     schema="Page",
@@ -121,33 +118,86 @@ use App\Http\Controllers\Controller;
  * )
  *
  * @OA\Tag(
- *     name="Passwords",
- *     description="API Endpoints for managing passwords"
+ *     name="Products",
+ *     description="API Endpoints for managing products"
  * )
  *
  * @OA\Schema(
- *     schema="Password",
+ *     schema="Product",
  *     type="object",
  *
  *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="vault_id", type="integer", example=1),
+ *     @OA\Property(property="category_id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="Facebook"),
- *     @OA\Property(property="value", type="string", example="johndoe"),
+ *     @OA\Property(property="description", type="string", example="description"),
+ *     @OA\Property(property="price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="stock", type="integer", example=10),
+ *     @OA\Property(property="sku", type="string", example="SKU-12345"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
  * )
  *
  * @OA\Schema(
- *     schema="StorePasswordRequest",
+ *     schema="StoreProductsRequest",
  *     type="object",
  *
- *     @OA\Property(property="vault_id", type="integer", example=1),
+ *     @OA\Property(property="category_id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="Facebook"),
- *     @OA\Property(property="value", type="string", example="johndoe"),
- *     @OA\Property(property="description", type="string", example="My Facebook password")
+ *     @OA\Property(property="description", type="string", example="My Facebook password"),
+ *     @OA\Property(property="price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="stock", type="integer", example=10),
+ *     @OA\Property(property="sku", type="string", example="SKU-12345")
  * )
  *
- * @OA\Tag (
+ * @OA\Tag(
+ *     name="Orders",
+ *     description="API Endpoints for managing orders"
+ * )
+ *
+ * @OA\Schema(
+ *     schema="Order",
+ *     type="object",
+ *
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="user_id", type="integer", example=1),
+ *     @OA\Property(property="status", type="string", example="pending"),
+ *     @OA\Property(property="total_price", type="number", format="float", example=100.00),
+ *     @OA\Property(property="payment_status", type="string", example="pending"),
+ *     @OA\Property(property="payment_method", type="string", example="cash"),
+ *     @OA\Property(property="shipping_address", type="string", example="123 Main St, New York, NY 10030"),
+ *     @OA\Property(property="billing_address", type="string", example="123 Main St, New York, NY 10030"),
+ *     @OA\Property(property="notes", type="string", example="Please deliver before 5pm"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
+ * )
+ *
+ * @OA\Schema(
+ *    schema="StoreOrderRequest",
+ *    type="object",
+ *    required={"user_id", "status", "total_price", "payment_status", "shipping_address", "items"},
+ *
+ *    @OA\Property(property="user_id", type="integer", example=1),
+ *    @OA\Property(property="status", type="string", example="pending"),
+ *    @OA\Property(property="total_price", type="number", format="float", example=100.00),
+ *    @OA\Property(property="payment_status", type="string", example="pending"),
+ *    @OA\Property(property="payment_method", type="string", example="cash"),
+ *    @OA\Property(property="shipping_address", type="string", example="123 Main St, New York, NY 10030"),
+ *    @OA\Property(property="billing_address", type="string", example="123 Main St, New York, NY 10030"),
+ *    @OA\Property(property="notes", type="string", example="Please deliver before 5pm"),
+ *    @OA\Property(property="items", type="array", @OA\Items(ref="#/components/schemas/OrderItem"))
+ * )
+ *
+ * @OA\Schema(
+ *     schema="OrderItem",
+ *     type="object",
+ *     required={"product_id", "quantity", "price"},
+ *
+ *     @OA\Property(property="product_id", type="integer", example=1),
+ *     @OA\Property(property="quantity", type="integer", example=1),
+ *     @OA\Property(property="price", type="number", format="float", example=100.00)
+ * )
+ *
+ * @OA\Tag(
  *     name="SharedAccess",
  *     description="Operations related to shared access management"
  * )
@@ -158,22 +208,22 @@ use App\Http\Controllers\Controller;
  *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
  *     @OA\Property(property="expires_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
- *)
+ * )
  *
  * @OA\Schema(
  *     schema="StoreSharedAccessRequest",
  *     type="object",
  *
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
- *     @OA\Property(property="expires_at", type="string", format="date-time", example="2026-08-01T00:00:00.000000Z"),
- *     )
+ *     @OA\Property(property="expires_at", type="string", format="date-time", example="2026-08-01T00:00:00.000000Z")
+ * )
  *
  * @OA\Schema(
  *     schema="UpdateSharedAccessRequest",
@@ -182,10 +232,10 @@ use App\Http\Controllers\Controller;
  *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="user_id", type="integer", example=1),
- *     @OA\Property(property="accessible_type", type="string", example="VaultModel"),
+ *     @OA\Property(property="accessible_type", type="string", example="CategoryModel"),
  *     @OA\Property(property="accessible_id", type="integer", example=1),
- *     @OA\Property(property="expires_at", type="string", format="date-time", example="2028-08-01T00:00:00.000000Z"),
- *     )
+ *     @OA\Property(property="expires_at", type="string", format="date-time", example="2028-08-01T00:00:00.000000Z")
+ * )
  *
  * @OA\Tag(
  *     name="Media",
@@ -196,12 +246,12 @@ use App\Http\Controllers\Controller;
  *     schema="Media",
  *     type="object",
  *
- *      @OA\Property(property="id", type="integer", example=1),
- *      @OA\Property(property="user_id", type="integer", example=1),
- *      @OA\Property(property="file_name", type="string", example="example.jpg"),
- *      @OA\Property(property="file_path", type="string", example="/uploads/example.jpg"),
- *      @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
- *      @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="user_id", type="integer", example=1),
+ *     @OA\Property(property="file_name", type="string", example="example.jpg"),
+ *     @OA\Property(property="file_path", type="string", example="/uploads/example.jpg"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
  * )
  *
  * @OA\Tag(
@@ -221,29 +271,27 @@ use App\Http\Controllers\Controller;
  * @OA\Tag(
  *      name="User",
  *      description="Operations related to user management"
- *  )
+ * )
  *
  * @OA\Schema(
  *      schema="User",
  *      type="object",
  *
  *      @OA\Property(property="id", type="integer", example=1),
- *      @OA\Property(property="name", type="string", example="John Doe"),
- *      @OA\Property(property="email", type="string", example="example@ukr.net"),
- *      @OA\Property(property="password", type="string", example="password"),
- *      @OA\Property(property="created_at", type="string", format="date-time", example="2021-09-01T12:00:00"),
- *      @OA\Property(property="updated_at", type="string", format="date-time", example="2021-09-01T12:00:00")
- *  )
+ *      @OA\Property(property="email", type="string", example="admin@example.com"),
+ *      @OA\Property(property="name", type="string", example="Admin User"),
+ *      @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *      @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
+ * )
  *
- * @OA\Schema (
+ * @OA\Schema(
  *     schema="StoreUserRequest",
  *     type="object",
- *
- *     @OA\Property(property="name", type="string", example="John Doe"),
- *     @OA\Property(property="email", type="string", example="example@gmail.com"),
- *     @OA\Property(property="password", type="string", example="password"),
- *     @OA\Property(property="password_confirmation", type="string", example="password")
- *)
+ *     required={"email", "name", "password"},
+ *     @OA\Property(property="email", type="string", example="test#example.com"),
+ *     @OA\Property(property="name", type="string", example="Test User"),
+ *     @OA\Property(property="password", type="string", example="password")
+ * )
  */
 class OpenApi extends Controller
 {

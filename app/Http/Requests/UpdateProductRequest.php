@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePasswordRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,12 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'vault_id' => 'required | exists:categories,id',
+            'category_id' => 'required | exists:categories,id',
             'name' => 'required | string | min:2 | max:255',
-            'value' => 'required',
             'description' => 'nullable',
+            'price' => 'required | numeric | min:0.01',
+            'stock' => 'required | integer | min:0',
+            'sku' => 'required | string | max:50',
         ];
     }
 }
