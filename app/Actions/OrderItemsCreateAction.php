@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Contracts\MutationActionInterface;
 use App\Models\OrderItem;
 
-class OrderItemsCreateActions implements MutationActionInterface
+class OrderItemsCreateAction implements MutationActionInterface
 {
     public function handle(array $data): mixed
     {

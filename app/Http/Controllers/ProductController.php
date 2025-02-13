@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
@@ -16,7 +17,18 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request): JsonResponse
     {
-        return response()->json(Product::create($request->validated()));
+        $validated = $request->validated();
+        $product = Product::create($validated);
+
+        if (isset($validated['tags'])) {
+            $tags = collect($validated['tags'])->map(function ($tagName) {
+                return Tag::firstOrCreate(['name' => $tagName])->id;
+            });
+
+            $product->tags()->sync($tags);
+        }
+
+        return response()->json($product->load('tags'));
     }
 
     public function show(Product $product): JsonResponse

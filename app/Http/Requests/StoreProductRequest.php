@@ -54,6 +54,8 @@ class StoreProductRequest extends FormRequest
                 'max:50',
                 Rule::unique('products', 'sku'),
             ],
+            'tags' => 'array',
+            'tags.*' => 'string'
         ];
     }
 }
