@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\OrderItemsCreateActions;
+use App\Actions\OrderItemsCreateAction;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
@@ -16,7 +16,7 @@ class OrderController extends Controller
         return response()->json(Order::with('items')->get());
     }
 
-    public function store(StoreOrderRequest $request, OrderItemsCreateActions $actions): JsonResponse
+    public function store(StoreOrderRequest $request, OrderItemsCreateAction $actions): JsonResponse
     {
         $order = Order::create($request->validated());
 
