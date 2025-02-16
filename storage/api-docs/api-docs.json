@@ -1892,6 +1892,14 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2021-08-01T00:00:00.000000Z"
+                    },
+                    "tags": {
+                        "description": "List of tags associated wiht the product",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "technology"
+                        }
                     }
                 },
                 "type": "object"
@@ -1922,6 +1930,14 @@
                     "sku": {
                         "type": "string",
                         "example": "SKU-12345"
+                    },
+                    "tags": {
+                        "description": "List of tags associated wiht the product",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "technology"
+                        }
                     }
                 },
                 "type": "object"

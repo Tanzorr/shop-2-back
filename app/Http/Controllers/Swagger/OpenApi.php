@@ -134,7 +134,17 @@ use App\Http\Controllers\Controller;
  *     @OA\Property(property="stock", type="integer", example=10),
  *     @OA\Property(property="sku", type="string", example="SKU-12345"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
- *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *
+ *     @OA\Property(
+ *         property="tags",
+ *         type="array",
+ *         description="List of tags associated wiht the product",
+ *         @OA\Items(
+ *             type="string",
+ *             example="technology"
+ *         )
+ *     )
  * )
  *
  * @OA\Schema(
@@ -146,7 +156,17 @@ use App\Http\Controllers\Controller;
  *     @OA\Property(property="description", type="string", example="My Facebook password"),
  *     @OA\Property(property="price", type="number", format="float", example=100.00),
  *     @OA\Property(property="stock", type="integer", example=10),
- *     @OA\Property(property="sku", type="string", example="SKU-12345")
+ *     @OA\Property(property="sku", type="string", example="SKU-12345"),
+ *
+ *     @OA\Property(
+ *         property="tags",
+ *         type="array",
+ *         description="List of tags associated wiht the product",
+ *         @OA\Items(
+ *             type="string",
+ *             example="technology"
+ *         )
+ *     )
  * )
  *
  * @OA\Tag(
