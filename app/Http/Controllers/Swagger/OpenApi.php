@@ -292,6 +292,27 @@ use App\Http\Controllers\Controller;
  *     @OA\Property(property="name", type="string", example="Test User"),
  *     @OA\Property(property="password", type="string", example="password")
  * )
+ *
+ * @OA\Tag(
+ *      name="Tag",
+ *      description="Operations related to tag management"
+ * )
+ *
+ * @OA\Schema(
+ *      schema="Tag",
+ *      type="object",
+ *      @OA\Property(property="id", type="integer", example=1),
+ *      @OA\Property(property="name", type="string", example="Technology"),
+ *      @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
+ *      @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z")
+ * )
+ *
+ * @OA\Schema(
+ *     schema="StoreTagRequest",
+ *     type="object",
+ *     required={"name"},
+ *     @OA\Property(property="name", type="string", example="New Tag")
+ * )
  */
 class OpenApi extends Controller
 {

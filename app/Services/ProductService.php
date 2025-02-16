@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
+    /**
+     * @throws \Exception
+     */
     public function storeProduct(array $data): Product
     {
         return $this->saveProduct(new Product(), $data);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function updateProduct(Product $product, array $data): Product
     {
         return $this->saveProduct($product, $data);
@@ -22,12 +28,10 @@ class ProductService
     {
         DB::beginTransaction();
         try {
-            $product->fill($data);
-            $product->save();
+            $product->fill($data)->save();
 
             if (!empty($data['tags'])) {
-                $tags = $this->getOrCreateTags($data['tags']);
-                $product->tags()->sync($tags);
+                $product->tags()->sync($this->getOrCreateTags($data['tags']));
             }
 
             DB::commit();
@@ -40,8 +44,6 @@ class ProductService
 
     private function getOrCreateTags(array $tagNames): array
     {
-        return collect($tagNames)->map(function ($tagName) {
-            return Tag::firstOrCreate(['name' => $tagName])->id;
-        })->toArray();
+        return collect($tagNames)->map(fn($tagName) => Tag::firstOrCreate(['name' => $tagName])->id)->toArray();
     }
 }
