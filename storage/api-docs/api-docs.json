@@ -1095,6 +1095,36 @@
                 ]
             }
         },
+        "/api/export-products": {
+            "get": {
+                "tags": [
+                    "Product Export"
+                ],
+                "summary": "Export products to Excel",
+                "operationId": "8fe48ef4403fa82a088b539826fed841",
+                "responses": {
+                    "200": {
+                        "description": "File successfully exported",
+                        "headers": {
+                            "Content-Disposition": {
+                                "description": "attachment; filename=products.xlsx",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shared-accesses": {
             "get": {
                 "tags": [
@@ -2332,6 +2362,10 @@
         {
             "name": "Category",
             "description": "Category"
+        },
+        {
+            "name": "Product Export",
+            "description": "Product Export"
         },
         {
             "name": "Tags",
