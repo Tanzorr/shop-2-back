@@ -14,7 +14,7 @@ class ProductsExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Product::all(['id', 'name', 'description', 'price', 'stock']);
+        return Product::all(['id', 'name', 'description', 'price', 'stock','sku','category_id']);
     }
 
     public function headings(): array
@@ -25,6 +25,8 @@ class ProductsExport implements FromCollection, WithHeadings
             'Description',
             'Price',
             'Stock',
+            'Sku',
+            'category_id'
         ];
     }
 }

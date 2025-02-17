@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Swagger;
 
-use Illuminate\Http\Response;
-use OpenApi\Annotations as OA;
-
 /**
  * @OA\Get(
  *     path="/api/export-products",

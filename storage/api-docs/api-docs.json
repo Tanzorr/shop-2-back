@@ -1125,6 +1125,47 @@
                 ]
             }
         },
+        "/api/import-products": {
+            "post": {
+                "tags": [
+                    "Product Import"
+                ],
+                "summary": "Import products from a CSV file",
+                "operationId": "1be00133164f69104a1219edd59e389d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Products imported successfully"
+                    },
+                    "400": {
+                        "description": "Invalid file format"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shared-accesses": {
             "get": {
                 "tags": [
@@ -2366,6 +2407,10 @@
         {
             "name": "Product Export",
             "description": "Product Export"
+        },
+        {
+            "name": "Product Import",
+            "description": "Product Import"
         },
         {
             "name": "Tags",
