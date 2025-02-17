@@ -1095,6 +1095,77 @@
                 ]
             }
         },
+        "/api/export-products": {
+            "get": {
+                "tags": [
+                    "Product Export"
+                ],
+                "summary": "Export products to Excel",
+                "operationId": "8fe48ef4403fa82a088b539826fed841",
+                "responses": {
+                    "200": {
+                        "description": "File successfully exported",
+                        "headers": {
+                            "Content-Disposition": {
+                                "description": "attachment; filename=products.xlsx",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/import-products": {
+            "post": {
+                "tags": [
+                    "Product Import"
+                ],
+                "summary": "Import products from a CSV file",
+                "operationId": "1be00133164f69104a1219edd59e389d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Products imported successfully"
+                    },
+                    "400": {
+                        "description": "Invalid file format"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shared-accesses": {
             "get": {
                 "tags": [
@@ -2332,6 +2403,14 @@
         {
             "name": "Category",
             "description": "Category"
+        },
+        {
+            "name": "Product Export",
+            "description": "Product Export"
+        },
+        {
+            "name": "Product Import",
+            "description": "Product Import"
         },
         {
             "name": "Tags",

@@ -6,6 +6,8 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductExportController;
+use App\Http\Controllers\ProductImportController;
 use App\Http\Controllers\SharedAccessController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -19,6 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class)->only(['index', 'show']);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('products', ProductController::class);
+    Route::get('export-products', [ProductExportController::class, 'export']);
+    Route::post('import-products', [ProductImportController::class, 'import']);
+
     Route::apiResource('orders', OrderController::class);
 
     Route::apiResource('/shared-accesses', SharedAccessController::class);
