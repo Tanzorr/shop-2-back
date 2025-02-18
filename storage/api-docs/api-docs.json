@@ -1166,6 +1166,63 @@
                 ]
             }
         },
+        "/api/profit-report": {
+            "get": {
+                "tags": [
+                    "Profit report"
+                ],
+                "operationId": "b96c9a37ee73e91f25b487e04ec7cba9",
+                "parameters": [
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profit report",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "product_id": {
+                                                "type": "integer"
+                                            },
+                                            "total_profit": {
+                                                "type": "number"
+                                            },
+                                            "total_quantity": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shared-accesses": {
             "get": {
                 "tags": [
@@ -2411,6 +2468,10 @@
         {
             "name": "Product Import",
             "description": "Product Import"
+        },
+        {
+            "name": "Profit report",
+            "description": "Profit report"
         },
         {
             "name": "Tags",
