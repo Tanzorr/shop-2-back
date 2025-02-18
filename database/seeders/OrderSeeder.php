@@ -18,5 +18,19 @@ class OrderSeeder extends Seeder
                 'order_id' => $order->id
             ]);
         });
+
+        $orders = Order::all();
+
+        foreach ($orders as $order) {
+            $orderItems = OrderItem::where('order_id', $order->id)->get();
+            $orderTotalPrice = 0;
+
+            foreach ($orderItems as $orderItem) {
+                $orderTotalPrice += ($orderItem->price * $orderItem->quantity);
+            }
+            $order->update([
+                'total_price' => $orderTotalPrice
+            ]);
+        }
     }
 }

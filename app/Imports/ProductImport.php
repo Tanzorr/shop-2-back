@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Product;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class ProductImport implements ToModel
@@ -12,7 +13,7 @@ class ProductImport implements ToModel
     {
         $this->current++;
         if ($this->current > 1) {
-            return new \App\Models\Product([
+            return new Product([
                 'name' => $row[1],
                 'description' => $row[2],
                 'price' => $row[3],

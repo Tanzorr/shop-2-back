@@ -20,13 +20,13 @@ class OrderFactory extends Factory
         return [
             'user_id' => rand(1, 10),
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'canceled']),
-            'total_price' => $this->faker->randomFloat(2, 10, 1000),
+            'total_price' => 0,
             'payment_status' => $this->faker->randomElement(['pending', 'paid', 'failed', 'refunded']),
             'payment_method' => $this->faker->randomElement(['credit_card', 'paypal', 'bank_transfer', 'cash_on_delivery']),
             'shipping_address' => $this->faker->address,
             'billing_address' => $this->faker->address,
             'notes' => $this->faker->optional()->sentence,
-            'created_at' => now(),
+            'created_at' => $this->faker->dateTimeBetween('-6 months', 'now'), // Діапазон пів року в минуле
             'updated_at' => now(),
         ];
     }
