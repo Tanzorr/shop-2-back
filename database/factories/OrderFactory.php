@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'shipping_address' => $this->faker->address,
             'billing_address' => $this->faker->address,
             'notes' => $this->faker->optional()->sentence,
-            'created_at' => $this->faker->dateTimeBetween('-6 months', 'now'), // Діапазон пів року в минуле
+            'created_at' => $this->faker->dateTimeBetween('-6 months', 'now'),
             'updated_at' => now(),
         ];
     }

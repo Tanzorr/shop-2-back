@@ -27,8 +27,8 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'purchase_price' => $purchasePrice,
-            'sale_price' => $purchasePrice + $this->faker->randomFloat(2, 1, 100), // Продажна ціна більша за закупівельну
-            'stock' => $this->faker->numberBetween(0, 100), // Stock between 0 and 100
+            'sale_price' => $purchasePrice + $this->faker->randomFloat(2, 1, 100),
+            'stock' => $this->faker->numberBetween(0, 100),
             'sku' => $this->faker->unique()->bothify('SKU-#####'),
             'created_at' => now(),
             'updated_at' => now(),
