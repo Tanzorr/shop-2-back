@@ -2,27 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderItem;
+use App\Services\ProfitReportService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class ProfitReportController extends Controller
 {
-    public function generateReport(Request $request): JsonResponse
-    {
-        $startDate = $request->start_date;
-        $endDate = $request->end_date;
 
-        $profitReport = OrderItem::join('products', 'order_items.product_id', '=', 'products.id')
-            ->whereBetween('order_items.created_at', [$startDate, $endDate])
-            ->selectRaw('SUM((order_items.price - products.purchase_price) * order_items.quantity) as total_profit')
-            ->first();
+    public function __construct(private ProfitReportService $profitReportService)
+    {
+    }
+    public function generateReport(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $categoryId = $request->input('category_id');
+        $productId = $request->input('product_id');
+
+        $totalProfit = $this->profitReportService->getTotalProfit($startDate, $endDate, $categoryId, $productId);
+        $profitByCategory = $this->profitReportService->getProfitByCategory($startDate, $endDate);
 
         return response()->json([
-            'profit' => $profitReport,
-            'start_date' => $startDate,
-            'end_date' => $endDate
+            'total_profit' => $totalProfit->total_profit ?? 0,
+            'total_quantity' => $totalProfit->total_quantity ?? 0,
+            'profit_by_category' => $profitByCategory,
         ]);
     }
 }
