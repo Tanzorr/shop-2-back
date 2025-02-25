@@ -15,13 +15,7 @@ class ProductController extends Controller
     {}
     public function index(ProductFilterRequest $request): JsonResponse
     {
-        $products = Product::query()
-            ->search($request->input('search'))
-            ->filterByCategory($request->input('category_id'))
-            ->filterByTags($request->input('tag_ids', []))
-            ->paginate(10);
-
-        return response()->json($products);
+        return response()->json($this->productService->getFilteredProducts($request->validated()));
     }
 
     /**
