@@ -26,8 +26,6 @@ class ProfitReportService
         return $query->first();
     }
 
-
-
     public function getProfitByCategory($startDate, $endDate): Collection
     {
         return OrderItem::select(
