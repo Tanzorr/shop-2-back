@@ -1166,6 +1166,99 @@
                 ]
             }
         },
+        "/api/profit-report": {
+            "get": {
+                "tags": [
+                    "Profit report"
+                ],
+                "operationId": "b96c9a37ee73e91f25b487e04ec7cba9",
+                "parameters": [
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "Start date for the profit report. Default: 6 months ago",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "2024-08-01"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "End date for the profit report. Default: today",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "2024-12-31"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category ID for filtering. Optional",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "Product ID for filtering. Optional",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "10"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profit report",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "total_profit": {
+                                            "type": "integer",
+                                            "example": 1500
+                                        },
+                                        "total_quantity": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "profit_by_category": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Electronics"
+                                                    },
+                                                    "category_profit": {
+                                                        "type": "integer",
+                                                        "example": 500
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shared-accesses": {
             "get": {
                 "tags": [
@@ -2411,6 +2504,10 @@
         {
             "name": "Product Import",
             "description": "Product Import"
+        },
+        {
+            "name": "Profit report",
+            "description": "Profit report"
         },
         {
             "name": "Tags",
