@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\Tag;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class ProductService
@@ -22,6 +23,15 @@ class ProductService
     public function updateProduct(Product $product, array $data): Product
     {
         return $this->saveProduct($product, $data);
+    }
+
+    public function getFilteredProducts(array $filters): LengthAwarePaginator
+    {
+        return Product::query()
+            ->search($filters['search']??'')
+            ->filterByCategory($filters['category_id']?? null)
+            ->filterByTags($filters['tags_ids']??[])
+            ->paginate($filters['per_page'] ?? 10);
     }
 
     private function saveProduct(Product $product, array $data): Product

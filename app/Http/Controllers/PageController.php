@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Models\Page;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 
 class PageController extends Controller
 {
 
-    public function index(): JsonResponse
+    public function index(ProductFilterRequest $request): JsonResponse
     {
-        return response()->json(Page::all());
+        $products = Product::query()
+            ->search($request->input('search'))
+            ->filterByCategory($request->input('category_id'))
+            ->filterByTags($request->input('tag_ids', []))
+            ->paginate(10);
+
+        return response()->json($products);
     }
 
     /**

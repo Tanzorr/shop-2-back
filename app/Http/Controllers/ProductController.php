@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
-use App\Models\Tag;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 
@@ -13,9 +13,9 @@ class ProductController extends Controller
 {
     public function __construct(private readonly ProductService $productService)
     {}
-    public function index(): JsonResponse
+    public function index(ProductFilterRequest $request): JsonResponse
     {
-        return response()->json(Product::paginate(20));
+        return response()->json($this->productService->getFilteredProducts($request->validated()));
     }
 
     /**
