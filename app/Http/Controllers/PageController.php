@@ -12,15 +12,9 @@ use Illuminate\Http\JsonResponse;
 class PageController extends Controller
 {
 
-    public function index(ProductFilterRequest $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $products = Product::query()
-            ->search($request->input('search'))
-            ->filterByCategory($request->input('category_id'))
-            ->filterByTags($request->input('tag_ids', []))
-            ->paginate(10);
-
-        return response()->json($products);
+        return response()->json(Page::all());
     }
 
     /**

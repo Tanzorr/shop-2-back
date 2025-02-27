@@ -18,7 +18,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(1, 10),
+            'user_id' => rand(1, 100),
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'canceled']),
             'total_price' => 0,
             'payment_status' => $this->faker->randomElement(['pending', 'paid', 'failed', 'refunded']),
@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'shipping_address' => $this->faker->address,
             'billing_address' => $this->faker->address,
             'notes' => $this->faker->optional()->sentence,
-            'created_at' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'created_at' => $this->faker->dateTimeBetween('-12 months', 'now'),
             'updated_at' => now(),
         ];
     }

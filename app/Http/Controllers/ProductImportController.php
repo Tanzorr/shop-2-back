@@ -12,9 +12,8 @@ use Excel;
 
 class ProductImportController extends Controller
 {
-    public function import(Request $request)
+    public function import(Request $request): void
     {
-
         Excel::import(new ProductImport, $request->file('file'));
     }
 }

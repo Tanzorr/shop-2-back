@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GenerateProfitReportRequest;
 use App\Services\ProfitReportService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 
 class ProfitReportController extends Controller
 {
 
-    public function __construct(private ProfitReportService $profitReportService)
+    public function __construct(private readonly ProfitReportService $profitReportService)
     {
     }
-    public function generateReport(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $categoryId = $request->input('category_id');
-        $productId = $request->input('product_id');
 
-        $totalProfit = $this->profitReportService->getTotalProfit($startDate, $endDate, $categoryId, $productId);
-        $profitByCategory = $this->profitReportService->getProfitByCategory($startDate, $endDate);
+    public function generateReport(GenerateProfitReportRequest $request): JsonResponse
+    {
+        $paramsData = $request->validated();
+        $totalProfit = $this->profitReportService->getTotalProfit($paramsData);
 
         return response()->json([
             'total_profit' => $totalProfit->total_profit ?? 0,
             'total_quantity' => $totalProfit->total_quantity ?? 0,
-            'profit_by_category' => $profitByCategory,
+            'profit_by_category' => $this->profitReportService->getProfitByCategories($paramsData)
         ]);
     }
 }
