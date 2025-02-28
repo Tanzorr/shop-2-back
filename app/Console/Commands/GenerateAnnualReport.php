@@ -3,8 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Jobs\CalculateAnnualReportJob;
+use App\Models\User;
+use App\Services\ProfitReportService;
 use DateTime;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
+use Throwable;
 
 class GenerateAnnualReport extends Command
 {
@@ -24,18 +28,26 @@ class GenerateAnnualReport extends Command
 
     /**
      * Execute the console command.
-     * @throws \DateMalformedStringException
      */
     public function handle()
     {
-        $userId = $this->argument('userId');
-        $startDate = new DateTime($this->argument('startDate'));
-        $endDate = new DateTime($this->argument('endDate'));
-        $categories = $this->argument('categories') ? explode(',', $this->argument('categories')) : null;
+        try {
+            $userId =  $this->argument('userId');
+            $startDate = new DateTime($this->argument('startDate'));
+            $endDate = new DateTime($this->argument('endDate'));
+            $categories = $this->argument('categories')
+                ? array_map('intval', explode(',', $this->argument('categories')))
+                : null;
 
-        $job = new CalculateAnnualReportJob($userId, $startDate, $endDate, $categories);
-        $job->handle(app('\App\Services\ProfitReportService'));
+            $profitReportService = App::make(ProfitReportService::class);
+            $user= User::find($userId);
 
-        $this->info('Annual report job dispatched successfully.');
+            $job = new CalculateAnnualReportJob($user, $startDate, $endDate, $categories);
+            $job->handle($profitReportService);
+
+            $this->info('Annual report job dispatched successfully.');
+        } catch (Throwable $e) {
+            $this->error('Error: ' . $e->getMessage());
+        }
     }
 }

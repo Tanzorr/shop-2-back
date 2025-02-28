@@ -48,13 +48,13 @@ class ProfitReportService
     }
 
     public function getAnnualUsersReport(
-        string $receiverId,
+        User $receiver,
         DateTime $startDate,
         DateTime $endDate,
         ?array $categories = null
     ): array
     {
-        $query = Order::where('user_id', $receiverId)
+        $query = Order::where('user_id', $receiver->id)
             ->whereBetween('orders.created_at', [$startDate, $endDate])
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->join('products', 'order_items.product_id', '=', 'products.id')
@@ -77,7 +77,7 @@ class ProfitReportService
             'total_orders' => $totalOrders,
             'average_order_value' => $averageOrderValue,
             'monthly_revenue' => $monthlyRevenue,
-            '$receiver'=>$receiverId
+            '$receiver'=>$receiver
         ];
     }
 }

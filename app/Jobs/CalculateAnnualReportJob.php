@@ -17,7 +17,7 @@ class CalculateAnnualReportJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private string     $receiverId,
+        private User     $receiver,
         private DateTime $startDate,
         private DateTime $endDate,
         private ?array   $categories = null
@@ -31,12 +31,12 @@ class CalculateAnnualReportJob implements ShouldQueue
      */
     public function handle(ProfitReportService $service): void
     {
-        $report = $service->getAnnualUsersReport($this->receiverId, $this->startDate, $this->endDate, $this->categories);
+        $report = $service->getAnnualUsersReport($this->receiver, $this->startDate, $this->endDate, $this->categories);
 
         $reportString = json_encode($report);
 
         Mail::raw($reportString, function ($message) {
-            $message->to('hello@example.com')
+            $message->to($this->receiver->email)
                 ->subject('Тест Mailpit');
         });
     }
