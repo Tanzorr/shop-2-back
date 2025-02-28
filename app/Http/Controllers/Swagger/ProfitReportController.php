@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Swagger;
 
 class ProfitReportController
 {
+
     /**
      *
      * @OA\Get(
@@ -71,4 +72,33 @@ class ProfitReportController
      */
     public function generateReport()
     {}
+
+    /**
+     * @OA\Get(
+     *     path="/api/annual-user-report/{userId}",
+     *     tags={"Profit report"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="userId",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             example=1
+     *         ),
+     *         description="ID of the user for the annual report"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Annual user report",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="status", type="string", example="Report generated successfully")
+     *         )
+     *     )
+     * )
+     */
+    public function getAnnualUsersSpend()
+    {
+    }
 }

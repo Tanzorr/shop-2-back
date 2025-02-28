@@ -24,15 +24,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
     Route::get('export-products', [ProductExportController::class, 'export']);
     Route::post('import-products', [ProductImportController::class, 'import']);
-    Route::get('profit-report', [ProfitReportController::class, 'generateReport']);
+    Route::get('profit-report', [ProfitReportController::class, 'generateTotalReport']);
+    Route::get('annual-user-report/{userId}', [ProfitReportController::class, 'getAnnualUsersSpend']);
 
     Route::apiResource('orders', OrderController::class);
-
-    Route::apiResource('/shared-accesses', SharedAccessController::class);
-    Route::get(
-        '/users/not-access/{entity}/{entityId}',
-        [UserController::class, 'getNotAccessedUsers']
-    );
     Route::apiResource('/medias', MediaController::class);
     Route::prefix('entities/media')->group(function () {
         Route::post('attach', [EntityMediaController::class, 'attach']);
@@ -40,10 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::apiResource('pages', PageController::class);
     Route::apiResource('tags', TagController::class);
-});
-
-Route::get('/csrf-token', function () {
-    return response()->json(['csrfToken' => csrf_token()]);
 });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
