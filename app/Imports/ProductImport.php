@@ -7,9 +7,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class ProductImport implements ToModel
 {
-    private $current = 0;
+    private int $current = 0;
 
-    public function model(array $row)
+    public function model(array $row): mixed
     {
         $this->current++;
         if ($this->current > 1) {

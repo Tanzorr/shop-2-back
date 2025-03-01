@@ -13,19 +13,11 @@ class GenerateOrderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private int $count;
-
-    public function __construct(int $count = 10000)
-    {
-        $this->count = $count;
-    }
-
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        //  DB::query()->select('c.name', 'p.name', 'month(orders.created_at)', 'sum(oi.quantity) as total')
         $request = DB::select('SELECT c.name, p.name, month(orders.created_at), sum(oi.quantity) as total
                                     FROM orders
                                              join laravel.order_items oi on orders.id = oi.order_id

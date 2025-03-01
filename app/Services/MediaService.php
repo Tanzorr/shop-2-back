@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaService implements MediaServiceInterface
 {
-    public function __construct(protected Guard $auth) {}
+    public function __construct(protected Guard $auth)
+    {
+    }
 
     /**
      * Get all media for the authenticated user.
@@ -58,12 +60,12 @@ class MediaService implements MediaServiceInterface
         $media->delete();
     }
 
-    public function attachMediaToEntity($entity, $mediaId): void
+    public function attachMedia($entity, $mediaId): void
     {
         $entity->media()->attach($mediaId);
     }
 
-    public function detachMediaFromEntity($entity, $mediaId): void
+    public function deleteAllMedia($entity, $mediaId): void
     {
         $entity->media()->detach($mediaId);
     }

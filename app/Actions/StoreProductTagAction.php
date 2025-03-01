@@ -13,8 +13,8 @@ class StoreProductTagAction implements MutationActionInterface
 
         $product = Product::create($data);
 
-        if (isset($validated['tags'])) {
-            $tags = collect($validated['tags'])->map(function ($tagName) {
+        if (isset($data['tags'])) {
+            $tags = collect($data['tags'])->map(function ($tagName) {
                 return Tag::firstOrCreate(['name' => $tagName])->id;
             });
 
