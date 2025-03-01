@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Swagger;
 
-
 /**
  * @OA\Post(
  *     path="/api/import-products",
  *     summary="Import products from a CSV file",
  *     tags={"Product Import"},
  *     security={{"bearerAuth": {}}},
+ *
  *     @OA\RequestBody(
  *         required=true,
+ *
  *         @OA\MediaType(
  *             mediaType="multipart/form-data",
+ *
  *             @OA\Schema(
+ *
  *                 @OA\Property(
  *                     property="file",
  *                     type="string",
@@ -22,6 +25,7 @@ namespace App\Http\Controllers\Swagger;
  *             )
  *         )
  *     ),
+ *
  *     @OA\Response(
  *         response=200,
  *         description="Products imported successfully"
@@ -38,8 +42,5 @@ namespace App\Http\Controllers\Swagger;
  */
 class ProductImportController
 {
-    public function import()
-    {
-
-    }
+    public function import() {}
 }

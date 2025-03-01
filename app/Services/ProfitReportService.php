@@ -52,8 +52,7 @@ class ProfitReportService
         DateTime $startDate,
         DateTime $endDate,
         ?array $categories = null
-    ): array
-    {
+    ): array {
         $query = Order::where('user_id', $receiver->id)
             ->whereBetween('orders.created_at', [$startDate, $endDate])
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
@@ -77,7 +76,7 @@ class ProfitReportService
             'total_orders' => $totalOrders,
             'average_order_value' => $averageOrderValue,
             'monthly_revenue' => $monthlyRevenue,
-            '$receiver'=>$receiver
+            '$receiver' => $receiver,
         ];
     }
 }

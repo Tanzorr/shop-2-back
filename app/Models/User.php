@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Scopes\UserCategoryScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,8 +17,6 @@ use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -40,6 +37,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $shared_vaults_relation_count
  * @property-read Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static Builder<static>|User filterBySearch($search = '')
  * @method static Builder<static>|User newModelQuery()
@@ -54,6 +52,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereRole($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticated
@@ -74,7 +73,7 @@ class User extends Authenticated
         'remember_token',
     ];
 
-    protected $appends = ['media',];
+    protected $appends = ['media'];
 
     public function scopeFilterBySearch(Builder $query, $search = ''): Builder
     {
@@ -118,6 +117,7 @@ class User extends Authenticated
     {
         return $this->media()->get();
     }
+
     public function media(): MorphToMany
     {
         return $this->morphToMany(Media::class, 'mediable', 'media_relations');

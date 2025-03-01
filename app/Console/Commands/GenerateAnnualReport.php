@@ -29,10 +29,10 @@ class GenerateAnnualReport extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         try {
-            $userId =  $this->argument('userId');
+            $userId = $this->argument('userId');
             $startDate = new DateTime($this->argument('startDate'));
             $endDate = new DateTime($this->argument('endDate'));
             $categories = $this->argument('categories')
@@ -40,14 +40,14 @@ class GenerateAnnualReport extends Command
                 : null;
 
             $profitReportService = App::make(ProfitReportService::class);
-            $user= User::find($userId);
+            $user = User::find($userId);
 
             $job = new CalculateAnnualReportJob($user, $startDate, $endDate, $categories);
             $job->handle($profitReportService);
 
             $this->info('Annual report job dispatched successfully.');
         } catch (Throwable $e) {
-            $this->error('Error: ' . $e->getMessage());
+            $this->error('Error: '.$e->getMessage());
         }
     }
 }

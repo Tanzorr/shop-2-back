@@ -11,8 +11,8 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
-    public function __construct(private readonly ProductService $productService)
-    {}
+    public function __construct(private readonly ProductService $productService) {}
+
     public function index(ProductFilterRequest $request): JsonResponse
     {
         return response()->json($this->productService->getFilteredProducts($request->validated()));
@@ -36,7 +36,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
-        return response()->json($this->productService->updateProduct($product, $request->validated())->load('tags') );
+        return response()->json($this->productService->updateProduct($product, $request->validated())->load('tags'));
     }
 
     public function destroy(Product $product): JsonResponse

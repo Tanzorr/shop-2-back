@@ -31,7 +31,7 @@ class UpdateProductRequest extends FormRequest
             'stock' => 'required | integer | min:0',
             'sku' => 'required | string | max:50',
             'tags' => 'array',
-            'tags.*' => 'string'
+            'tags.*' => 'string',
         ];
     }
 }

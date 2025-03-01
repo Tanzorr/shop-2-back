@@ -13,8 +13,7 @@ class EntityMediaController extends Controller
     public function __construct(
         private AttachMediaAction $attachMediaAction,
         private DetachMediaAction $detachMediaAction
-    ) {
-    }
+    ) {}
 
     public function attach(AttachMediaRequest $request): JsonResponse
     {
@@ -23,6 +22,7 @@ class EntityMediaController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
+
         return response()->json($attachedEntity, 200);
     }
 

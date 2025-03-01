@@ -14,7 +14,7 @@ class ProductService
      */
     public function storeProduct(array $data): Product
     {
-        return $this->saveProduct(new Product(), $data);
+        return $this->saveProduct(new Product, $data);
     }
 
     /**
@@ -28,9 +28,9 @@ class ProductService
     public function getFilteredProducts(array $filters): LengthAwarePaginator
     {
         return Product::query()
-            ->search($filters['search']??'')
-            ->filterByCategory($filters['category_id']?? null)
-            ->filterByTags($filters['tags_ids']??[])
+            ->search($filters['search'] ?? '')
+            ->filterByCategory($filters['category_id'] ?? null)
+            ->filterByTags($filters['tags_ids'] ?? [])
             ->paginate($filters['per_page'] ?? 10);
     }
 
@@ -40,11 +40,12 @@ class ProductService
         try {
             $product->fill($data)->save();
 
-            if (!empty($data['tags'])) {
+            if (! empty($data['tags'])) {
                 $product->tags()->sync($this->getOrCreateTags($data['tags']));
             }
 
             DB::commit();
+
             return $product;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -54,6 +55,6 @@ class ProductService
 
     private function getOrCreateTags(array $tagNames): array
     {
-        return collect($tagNames)->map(fn($tagName) => Tag::firstOrCreate(['name' => $tagName])->id)->toArray();
+        return collect($tagNames)->map(fn ($tagName) => Tag::firstOrCreate(['name' => $tagName])->id)->toArray();
     }
 }

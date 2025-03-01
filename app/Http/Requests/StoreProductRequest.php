@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,7 +32,7 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'string',
                 'min:2',
-                'max:255'
+                'max:255',
             ],
             'description' => [
                 'nullable',
@@ -55,8 +56,7 @@ class StoreProductRequest extends FormRequest
                 Rule::unique('products', 'sku'),
             ],
             'tags' => 'array',
-            'tags.*' => 'string'
+            'tags.*' => 'string',
         ];
     }
 }
-

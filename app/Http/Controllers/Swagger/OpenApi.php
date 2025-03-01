@@ -109,6 +109,7 @@ use App\Http\Controllers\Controller;
  *     schema="Page",
  *     type="object",
  *     required={"id", "author_id", "title", "content", "created_at", "updated_at"},
+ *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="author_id", type="integer", example=1),
  *     @OA\Property(property="title", type="string", example="Page title"),
@@ -135,11 +136,11 @@ use App\Http\Controllers\Controller;
  *     @OA\Property(property="sku", type="string", example="SKU-12345"),
  *     @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
  *     @OA\Property(property="updated_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
- *
  *     @OA\Property(
  *         property="tags",
  *         type="array",
  *         description="List of tags associated wiht the product",
+ *
  *         @OA\Items(
  *             type="string",
  *             example="technology"
@@ -157,11 +158,11 @@ use App\Http\Controllers\Controller;
  *     @OA\Property(property="price", type="number", format="float", example=100.00),
  *     @OA\Property(property="stock", type="integer", example=10),
  *     @OA\Property(property="sku", type="string", example="SKU-12345"),
- *
  *     @OA\Property(
  *         property="tags",
  *         type="array",
  *         description="List of tags associated wiht the product",
+ *
  *         @OA\Items(
  *             type="string",
  *             example="technology"
@@ -308,6 +309,7 @@ use App\Http\Controllers\Controller;
  *     schema="StoreUserRequest",
  *     type="object",
  *     required={"email", "name", "password"},
+ *
  *     @OA\Property(property="email", type="string", example="test#example.com"),
  *     @OA\Property(property="name", type="string", example="Test User"),
  *     @OA\Property(property="password", type="string", example="password")
@@ -321,6 +323,7 @@ use App\Http\Controllers\Controller;
  * @OA\Schema(
  *      schema="Tag",
  *      type="object",
+ *
  *      @OA\Property(property="id", type="integer", example=1),
  *      @OA\Property(property="name", type="string", example="Technology"),
  *      @OA\Property(property="created_at", type="string", format="date-time", example="2021-08-01T00:00:00.000000Z"),
@@ -331,6 +334,7 @@ use App\Http\Controllers\Controller;
  *     schema="StoreTagRequest",
  *     type="object",
  *     required={"name"},
+ *
  *     @OA\Property(property="name", type="string", example="New Tag")
  * )
  */

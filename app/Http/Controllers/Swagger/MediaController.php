@@ -24,9 +24,7 @@ class MediaController
      *     )
      * )
      */
-    public function index()
-    {
-    }
+    public function index() {}
 
     /**
      * @OA\Post(
@@ -70,9 +68,7 @@ class MediaController
      *     )
      * )
      */
-    public function store()
-    {
-    }
+    public function store() {}
 
     /**
      * @OA\Get(
@@ -104,9 +100,7 @@ class MediaController
      *     )
      * )
      */
-    public function show()
-    {
-    }
+    public function show() {}
 
     /**
      * @OA\Delete(
@@ -135,7 +129,5 @@ class MediaController
      *     )
      * )
      */
-    public function destroy()
-    {
-    }
+    public function destroy() {}
 }

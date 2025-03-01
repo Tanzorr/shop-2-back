@@ -17,12 +17,11 @@ class CalculateAnnualReportJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private User     $receiver,
+        private User $receiver,
         private DateTime $startDate,
         private DateTime $endDate,
-        private ?array   $categories = null
-    )
-    {
+        private ?array $categories = null
+    ) {
         //
     }
 
@@ -37,7 +36,7 @@ class CalculateAnnualReportJob implements ShouldQueue
 
         Mail::raw($reportString, function ($message) {
             $message->to($this->receiver->email)
-                ->subject('Тест Mailpit');
+                ->subject('Тест Mailpit User report');
         });
     }
 }

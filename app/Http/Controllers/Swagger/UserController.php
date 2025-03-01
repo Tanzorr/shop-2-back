@@ -31,9 +31,7 @@ class UserController
      *     )
      * )
      */
-    public function index()
-    {
-    }
+    public function index() {}
 
     /**
      * @OA\Post(
@@ -60,9 +58,7 @@ class UserController
      *     )
      * )
      */
-    public function store()
-    {
-    }
+    public function store() {}
 
     /**
      * @OA\Get(
@@ -88,9 +84,7 @@ class UserController
      *     )
      * )
      */
-    public function show()
-    {
-    }
+    public function show() {}
 
     /**
      * @OA\Put(
@@ -126,9 +120,7 @@ class UserController
      *     )
      * )
      */
-    public function update()
-    {
-    }
+    public function update() {}
 
     /**
      * @OA\Delete(
@@ -157,9 +149,7 @@ class UserController
      *     )
      * )
      */
-    public function destroy()
-    {
-    }
+    public function destroy() {}
 
     /**
      * @OA\Get(
@@ -198,7 +188,5 @@ class UserController
      *     )
      * )
      */
-    public function getNotAccessedUsers()
-    {
-    }
+    public function getNotAccessedUsers() {}
 }

@@ -8,7 +8,6 @@ use App\Models\Tag;
 
 class StoreProductTagAction implements MutationActionInterface
 {
-
     public function handle(array $data): mixed
     {
 

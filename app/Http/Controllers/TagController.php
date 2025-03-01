@@ -15,16 +15,16 @@ class TagController extends Controller
     public function index(): JsonResponse
     {
         $tags = Tag::all();
+
         return response()->json($tags);
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreTagRequest $request): JsonResponse
     {
-        return response()->json( Tag::create($request->validated()), 201);
+        return response()->json(Tag::create($request->validated()), 201);
     }
 
     /**
@@ -49,6 +49,7 @@ class TagController extends Controller
     public function destroy(Tag $tag): JsonResponse
     {
         $tag->delete();
+
         return response()->json(['message' => 'Tag deleted successfully']);
     }
 }

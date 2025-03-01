@@ -15,7 +15,7 @@ class OrderSeeder extends Seeder
     {
         Order::factory($count)->create()->each(function ($order) {
             OrderItem::factory(rand(1, 100))->create([
-                'order_id' => $order->id
+                'order_id' => $order->id,
             ]);
         });
 
@@ -29,7 +29,7 @@ class OrderSeeder extends Seeder
                 $orderTotalPrice += ($orderItem->price * $orderItem->quantity);
             }
             $order->update([
-                'total_price' => $orderTotalPrice
+                'total_price' => $orderTotalPrice,
             ]);
         }
     }
