@@ -12,16 +12,79 @@ class ProductController
      *     security={{"bearerAuth": {}}},
      *     operationId="getProducts",
      *
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         description="Search products by name or description",
+     *         required=false,
+     *
+     *         @OA\Schema(type="string", example="iPhone")
+     *     ),
+     *
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="Filter products by category ID",
+     *         required=false,
+     *
+     *         @OA\Schema(type="integer", example=2)
+     *     ),
+     *
+     *     @OA\Parameter(
+     *         name="tag_ids[]",
+     *         in="query",
+     *         description="Filter products by tag IDs (can be multiple)",
+     *         required=false,
+     *
+     *         @OA\Schema(
+     *             type="array",
+     *
+     *             @OA\Items(type="integer", example=5)
+     *         )
+     *     ),
+     *
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         description="Pagination page number",
+     *         required=false,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Parameter(
+     *         name="per_page",
+     *         in="query",
+     *         description="Number of items per page",
+     *         required=false,
+     *
+     *         @OA\Schema(type="integer", example=10)
+     *     ),
      *
      *     @OA\Response(
      *         response=200,
      *         description="List of products",
      *
      *         @OA\JsonContent(
-     *             type="array",
+     *             type="object",
      *
-     *             @OA\Items(ref="#/components/schemas/Product")
+     *             @OA\Property(property="data", type="array",
+     *
+     *                 @OA\Items(ref="#/components/schemas/Product")
+     *             ),
+     *
+     *             @OA\Property(property="meta", type="object",
+     *                 @OA\Property(property="current_page", type="integer", example=1),
+     *                 @OA\Property(property="last_page", type="integer", example=5),
+     *                 @OA\Property(property="per_page", type="integer", example=10),
+     *                 @OA\Property(property="total", type="integer", example=50)
+     *             )
      *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
      *     )
      * )
      */

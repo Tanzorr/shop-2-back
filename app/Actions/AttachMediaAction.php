@@ -15,7 +15,7 @@ class AttachMediaAction implements MutationActionInterface
     public function handle(array $data): mixed
     {
         $entity = $this->resolveEntity($data['mediable_type'], $data['mediable_id']);
-        $this->mediaService->attachMediaToEntity($entity, $data['media_id']);
+        $this->mediaService->attachMedia($entity, $data['media_id']);
 
         return $entity;
     }

@@ -42,7 +42,7 @@ class CategoryController
      *     )
      * )
      */
-    public function store(){}
+    public function store() {}
 
     /**
      * @OA\Get(
@@ -58,12 +58,13 @@ class CategoryController
      *
      *         @OA\JsonContent(
      *             type="array",
+     *
      *            @OA\Items(ref="#/components/schemas/Category")
      *         )
      *     )
      * )
      */
-    public function index(){}
+    public function index() {}
 
     /**
      * @OA\Get(
@@ -90,7 +91,7 @@ class CategoryController
      *     )
      * )
      */
-    public function show($id){}
+    public function show($id) {}
 
     /**
      * @OA\Put(
@@ -121,7 +122,7 @@ class CategoryController
      *     )
      * )
      */
-    public function update(){}
+    public function update() {}
 
     /**
      * @OA\Delete(
@@ -146,5 +147,5 @@ class CategoryController
      *     )
      * )
      */
-    public function destroy($id){}
+    public function destroy($id) {}
 }

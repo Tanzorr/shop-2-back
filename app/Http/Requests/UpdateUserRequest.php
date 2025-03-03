@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -25,8 +26,6 @@ class UpdateUserRequest extends FormRequest
             'name' => ['required', 'string', 'min:2'],
             'password' => ['nullable', 'min:6', 'confirmed'],
             'email' => ['required', 'email'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            // Додаткові поля можна валідувати таким чином
         ];
     }
 

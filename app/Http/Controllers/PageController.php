@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 
 class PageController extends Controller
 {
-
     public function index(): JsonResponse
     {
         return response()->json(Page::all());

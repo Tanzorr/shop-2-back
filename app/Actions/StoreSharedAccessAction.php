@@ -3,8 +3,8 @@
 namespace App\Actions;
 
 use App\Contracts\MutationActionInterface;
-use App\Models\Models\User;
 use App\Models\SharedAccess;
+use App\Models\User;
 
 class StoreSharedAccessAction implements MutationActionInterface
 {

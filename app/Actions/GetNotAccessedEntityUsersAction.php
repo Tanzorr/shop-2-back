@@ -4,7 +4,8 @@ namespace App\Actions;
 
 use App\Contracts\QueryInterface;
 use App\Contracts\ReadActionInterface;
-use App\Models\Models\User;
+
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class GetNotAccessedEntityUsersAction implements ReadActionInterface

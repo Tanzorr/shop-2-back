@@ -10,11 +10,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class ProductsExport implements FromCollection, WithHeadings
 {
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection()
     {
-        return Product::all(['id', 'name', 'description', 'price', 'stock','sku','category_id']);
+        return Product::all(['id', 'name', 'description', 'price', 'stock', 'sku', 'category_id']);
     }
 
     public function headings(): array
@@ -26,7 +26,7 @@ class ProductsExport implements FromCollection, WithHeadings
             'Price',
             'Stock',
             'Sku',
-            'category_id'
+            'category_id',
         ];
     }
 }

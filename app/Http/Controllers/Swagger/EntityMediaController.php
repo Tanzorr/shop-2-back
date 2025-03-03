@@ -34,9 +34,7 @@ class EntityMediaController
      *     )
      * )
      */
-    public function attach()
-    {
-    }
+    public function attach() {}
 
     /**
      * @OA\Post(
@@ -68,7 +66,5 @@ class EntityMediaController
      *     )
      * )
      */
-    public function detach()
-    {
-    }
+    public function detach() {}
 }

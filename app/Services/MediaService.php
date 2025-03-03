@@ -60,12 +60,12 @@ class MediaService implements MediaServiceInterface
         $media->delete();
     }
 
-    public function attachMediaToEntity($entity, $mediaId): void
+    public function attachMedia($entity, $mediaId): void
     {
         $entity->media()->attach($mediaId);
     }
 
-    public function detachMediaFromEntity($entity, $mediaId): void
+    public function deleteAllMedia($entity, $mediaId): void
     {
         $entity->media()->detach($mediaId);
     }

@@ -6,8 +6,8 @@ use App\Actions\GetNotAccessedEntityUsersAction;
 use App\Actions\GetUsersAction;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
 use App\Models\SharedAccess;
+use App\Models\User;
 use App\Queries\GetQuery;
 use App\Services\SharedAccessService;
 use Illuminate\Http\JsonResponse;
@@ -15,7 +15,7 @@ use Illuminate\Http\JsonResponse;
 class UserController extends Controller
 {
     public function __construct(
-        private SharedAccessService $sharedAccessService,
+        private readonly SharedAccessService $sharedAccessService,
     ) {}
 
     public function index(GetUsersAction $getUsersAction): JsonResponse

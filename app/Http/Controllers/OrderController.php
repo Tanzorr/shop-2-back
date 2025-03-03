@@ -6,7 +6,6 @@ use App\Actions\OrderItemsCreateAction;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
-use App\Models\OrderItem;
 use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
@@ -22,7 +21,7 @@ class OrderController extends Controller
 
         $actions->handle([
             'order_id' => $order->id,
-            'items' => $request->items
+            'items' => $request->items,
         ]);
 
         return response()->json($order->load('items'), 201);
@@ -43,6 +42,7 @@ class OrderController extends Controller
     public function destroy(Order $order): JsonResponse
     {
         $order->delete();
+
         return response()->json(['message' => 'Order deleted successfully']);
     }
 }

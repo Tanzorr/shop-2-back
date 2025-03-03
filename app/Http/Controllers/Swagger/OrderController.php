@@ -18,6 +18,7 @@ class OrderController
      *
      *         @OA\JsonContent(
      *             type="array",
+     *
      *             @OA\Items(ref="#/components/schemas/Order")
      *         )
      *     )
@@ -34,12 +35,14 @@ class OrderController
      *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(ref="#/components/schemas/StoreOrderRequest")
      *     ),
      *
      *     @OA\Response(
      *         response=201,
      *         description="Order created successfully",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Order")
      *     )
      * )
@@ -58,12 +61,14 @@ class OrderController
      *         in="path",
      *         required=true,
      *         description="Order ID",
+     *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
      *         description="Order details",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Order")
      *     )
      * )
@@ -82,17 +87,20 @@ class OrderController
      *         in="path",
      *         required=true,
      *         description="Order ID",
+     *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Order")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
      *         description="Order updated successfully",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Order")
      *     )
      * )
@@ -111,13 +119,16 @@ class OrderController
      *         in="path",
      *         required=true,
      *         description="Order ID",
+     *
      *         @OA\Schema(type="integer")
      *     ),
      *
      *     @OA\Response(
      *         response=200,
      *         description="Order deleted successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Order deleted successfully")
      *         )
      *     )

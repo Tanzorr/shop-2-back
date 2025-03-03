@@ -3,8 +3,8 @@
 namespace App\Traits;
 
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

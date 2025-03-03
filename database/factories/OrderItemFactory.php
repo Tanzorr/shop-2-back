@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,9 +20,9 @@ class OrderItemFactory extends Factory
     {
         $product = Product::find(Product::pluck('id')->random());
 
-        if (!$product) {
+        if (! $product) {
             throw new \Exception('No products available for creating orders.');
-        }else{
+        } else {
             return [
                 'product_id' => $product ? $product->id : null,
                 'quantity' => $this->faker->numberBetween(1, 5),
@@ -33,5 +32,4 @@ class OrderItemFactory extends Factory
             ];
         }
     }
-
 }

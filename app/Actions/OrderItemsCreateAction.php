@@ -18,7 +18,7 @@ class OrderItemsCreateAction implements MutationActionInterface
                     'price' => $item['price'],
                 ]);
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
 
