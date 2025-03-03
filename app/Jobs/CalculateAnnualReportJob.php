@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\AnnualReportMail;
 use App\Models\User;
 use App\Services\ProfitReportService;
 use DateTime;
@@ -32,11 +33,6 @@ class CalculateAnnualReportJob implements ShouldQueue
     {
         $report = $service->getAnnualUsersReport($this->receiver, $this->startDate, $this->endDate, $this->categories);
 
-        $reportString = json_encode($report);
-
-        Mail::raw($reportString, function ($message) {
-            $message->to($this->receiver->email)
-                ->subject('Тест Mailpit User report');
-        });
+        Mail::to($this->receiver->email)->send(new AnnualReportMail($report));
     }
 }
