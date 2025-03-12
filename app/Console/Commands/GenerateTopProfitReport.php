@@ -33,8 +33,6 @@ class GenerateTopProfitReport extends Command
     {
         $this->info('Starting report generation...');
 
-        (new GenerateTopCategoriesReport)->handle();
-
         dispatch_sync(new GenerateTopCategoriesReport);
         dispatch_sync(new GenerateTopProductsReport);
         dispatch_sync(new GenerateTopUsersReport);

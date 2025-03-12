@@ -21,10 +21,10 @@ class CalculateAnnualReportJob implements ShouldBeEncrypted, ShouldBeUnique, Sho
      * Create a new job instance.
      */
     public function __construct(
-        private User $receiver,
-        private DateTime $startDate,
-        private DateTime $endDate,
-        private ?array $categories = null
+        private readonly User $receiver,
+        private readonly DateTime $startDate,
+        private readonly DateTime $endDate,
+        private readonly ?array $categories = null
     ) {
         //
     }
@@ -39,8 +39,10 @@ class CalculateAnnualReportJob implements ShouldBeEncrypted, ShouldBeUnique, Sho
      */
     public function handle(ProfitReportService $service): void
     {
-        $report = $service->getAnnualUsersReport($this->receiver, $this->startDate, $this->endDate, $this->categories);
-
-        Mail::to($this->receiver->email)->send(new AnnualReportMail($report));
+        Mail::to($this->receiver->email)->send(
+            new AnnualReportMail(
+                $service->getAnnualUsersReport($this->receiver, $this->startDate, $this->endDate, $this->categories)
+            )
+        );
     }
 }
