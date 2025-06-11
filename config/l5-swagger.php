@@ -18,7 +18,7 @@ return [
                 /*
                  * Edit to include full URL in ui for assets
                  */
-                'use_absolute_path' => env('L5_SWAGGER_USE_ABSOLUTE_PATH', true),
+                'use_absolute_path' => env(key: 'L5_SWAGGER_USE_ABSOLUTE_PATH', default: true),
 
                 /*
                 * Edit to set path where swagger ui assets should be stored
@@ -274,7 +274,7 @@ return [
          */
         'ui' => [
             'display' => [
-                'dark_mode' => env('L5_SWAGGER_UI_DARK_MODE', false),
+                'dark_mode' => env('L5_SWAGGER_UI_DARK_MODE', true),
                 /*
                  * Controls the default expansion setting for the operations and tags. It can be :
                  * 'list' (expands only the tags),
