@@ -40,7 +40,9 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag): JsonResponse
     {
-        return response()->json($tag->update($request->validated()));
+        $tag->update($request->validated());
+
+        return response()->json($tag->fresh());
     }
 
     /**

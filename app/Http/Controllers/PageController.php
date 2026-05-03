@@ -45,10 +45,12 @@ class PageController extends Controller
     {
         $validated = $request->validated();
 
+        $page->update($validated);
+
         return response()->json([
             'message' => 'Page updated successfully',
-            'user' => $page->update($validated), 200,
-        ]);
+            'page' => $page->fresh(),
+        ], 200);
     }
 
     /**

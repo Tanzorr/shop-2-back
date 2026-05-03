@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function login(LoginUserRequest $request, LoginAction $loginAction): JsonResponse
     {
-        return response()->json($loginAction->handle(new GetQuery(['credentials' => $request->all()])), 200);
+        return response()->json($loginAction->handle(new GetQuery(['credentials' => $request->validated()])), 200);
     }
 
     /**
