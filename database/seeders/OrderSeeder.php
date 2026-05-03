@@ -11,23 +11,20 @@ class OrderSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run($count): void
+    public function run(int $count = 100): void
     {
         Order::factory($count)->create()->each(function ($order) {
-            OrderItem::factory(rand(1, 100))->create([
+            OrderItem::factory(rand(1, 10))->create([
                 'order_id' => $order->id,
             ]);
         });
 
-        $orders = Order::all();
+        $orders = Order::with('orderItems')->get();
 
         foreach ($orders as $order) {
-            $orderItems = OrderItem::where('order_id', $order->id)->get();
-            $orderTotalPrice = 0;
-
-            foreach ($orderItems as $orderItem) {
-                $orderTotalPrice += ($orderItem->price * $orderItem->quantity);
-            }
+            $orderTotalPrice = $order->orderItems->sum(function ($orderItem) {
+                return $orderItem->price * $orderItem->quantity;
+            });
             $order->update([
                 'total_price' => $orderTotalPrice,
             ]);

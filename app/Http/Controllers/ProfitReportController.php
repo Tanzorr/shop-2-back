@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GenerateProfitReportRequest;
-use App\Jobs\CalculateAnnualReportJob;
 use App\Services\ProfitReportService;
-use DateTime;
 use Illuminate\Http\JsonResponse;
 
 class ProfitReportController extends Controller
@@ -24,13 +22,5 @@ class ProfitReportController extends Controller
         ]);
     }
 
-    public function getAnnualUsersSpend(
-        $userId,
-        DateTime $startDate,
-        DateTime $endDate,
-        ?array $categories = null
-    ): void {
-        $job = new CalculateAnnualReportJob($userId, new DateTime('2024-01-01'), new DateTime('2024-12-31'), [10, 11, 23]);
-        $job->handle($this->profitReportService);
-    }
+
 }

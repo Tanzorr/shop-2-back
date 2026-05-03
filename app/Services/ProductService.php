@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\ProductCollection;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -25,14 +26,47 @@ class ProductService
         return $this->saveProduct($product, $data);
     }
 
-    public function getFilteredProducts(array $filters): LengthAwarePaginator
+    public function getFilteredProducts(array $filters): array
     {
-        return Product::query()
+        $categoryIdsArr = !empty($filters['category_ids'])
+            ? explode(',', $filters['category_ids'])
+            : null;
+
+        $paginator = Product::query()
             ->search($filters['search'] ?? '')
-            ->filterByCategory($filters['category_id'] ?? null)
+            ->filterByCategory($categoryIdsArr)
             ->filterByTags($filters['tags_ids'] ?? [])
             ->paginate($filters['per_page'] ?? 10);
+
+        return $this->clearPaginatorToArray($paginator);
     }
+
+    private function clearPaginatorToArray($paginator): array
+    {
+        $links = collect($paginator->linkCollection())
+            ->map(function ($link) {
+                $label = strip_tags($link['label']);
+
+                if (str_contains($label, 'Previous')) {
+                    $link['label'] = 'Previous';
+                } elseif (str_contains($label, 'Next')) {
+                    $link['label'] = 'Next';
+                }
+
+                return $link;
+            })
+            ->values();
+
+        return [
+            'data' => $paginator->items(),
+            'current_page' => $paginator->currentPage(),
+            'last_page' => $paginator->lastPage(),
+            'per_page' => $paginator->perPage(),
+            'total' => $paginator->total(),
+            'links' => $links,
+        ];
+    }
+
 
     private function saveProduct(Product $product, array $data): Product
     {
