@@ -23,7 +23,7 @@ class ProductFilterRequest extends FormRequest
     {
         return [
             'search' => ['nullable', 'string', 'max:255'],
-            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'category_ids' => ['nullable', 'string'],
             'tag_ids' => ['nullable', 'array'],
             'tag_ids.*' => ['integer', 'exists:tags,id'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],

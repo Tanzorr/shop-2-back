@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('users', UserController::class)->only(['destroy', 'store', 'update']);
     });
     Route::apiResource('users', UserController::class)->only(['index', 'show']);
-    Route::apiResource('categories', CategoryController::class);
+
     Route::get('export-products', [ProductExportController::class, 'export']);
     Route::post('import-products', [ProductImportController::class, 'import']);
     Route::get('profit-report', [ProfitReportController::class, 'generateTotalReport']);
@@ -35,5 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('tags', TagController::class);
 });
 Route::apiResource('products', ProductController::class);
+Route::apiResource('categories', CategoryController::class);
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('logout', [AuthController::class, 'logout']);

@@ -28,13 +28,17 @@ class ProductService
 
     public function getFilteredProducts(array $filters): array
     {
+        $categoryIdsArr = !empty($filters['category_ids'])
+            ? explode(',', $filters['category_ids'])
+            : null;
+
         $paginator = Product::query()
             ->search($filters['search'] ?? '')
-            ->filterByCategory($filters['category_id'] ?? null)
+            ->filterByCategory($categoryIdsArr)
             ->filterByTags($filters['tags_ids'] ?? [])
             ->paginate($filters['per_page'] ?? 10);
 
-      return $this->clearPaginatorToArray($paginator);
+        return $this->clearPaginatorToArray($paginator);
     }
 
     private function clearPaginatorToArray($paginator): array

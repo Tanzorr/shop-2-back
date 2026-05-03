@@ -13,6 +13,6 @@ class GetCategoryAction implements ReadActionInterface
     {
         return Category::filterBySearch($query->get('search'))
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(50);
     }
 }

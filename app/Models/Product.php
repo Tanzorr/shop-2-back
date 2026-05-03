@@ -42,9 +42,12 @@ class Product extends Model
             ->orWhere('sale_price', 'LIKE', "%{$keyword}%");
     }
 
-    public function scopeFilterByCategory(Builder $query, ?int $categoryId): Builder
+    public function scopeFilterByCategory(Builder $query, ?array $categoryIds): Builder
     {
-        return $query->when($categoryId, fn ($q) => $q->where('category_id', $categoryId));
+        return $query->when(
+            $categoryIds,
+            fn($q) => $q->whereIn('category_id', $categoryIds)
+        );
     }
 
     public function scopeFilterByTags(Builder $query, array $tagIds = []): Builder
