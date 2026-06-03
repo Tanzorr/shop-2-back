@@ -6,6 +6,7 @@ use App\Actions\OrderItemsCreateAction;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Services\OrderApplicationService;
 use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
@@ -44,5 +45,16 @@ class OrderController extends Controller
         $order->delete();
 
         return response()->json(['message' => 'Order deleted successfully']);
+    }
+
+    public function pay(int $order, OrderApplicationService $service): JsonResponse
+    {
+        try {
+            $order = $service->markAsPaid($order);
+        } catch (\DomainException $e) {
+            return response()->json(['message' => $e->getMessage()], 422);
+        }
+
+        return response()->json(['message' => 'Payment accepted', 'order' => $order], 202);
     }
 }

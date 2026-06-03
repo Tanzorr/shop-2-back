@@ -17,6 +17,7 @@ class Order extends Model
         'total_price',
         'payment_status',
         'payment_method',
+        'reservation_id',
         'shipping_address',
         'billing_address',
         'notes',

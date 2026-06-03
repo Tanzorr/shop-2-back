@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('annual-user-report/{userId}', [ProfitReportController::class, 'getAnnualUsersSpend']);
 
     Route::apiResource('orders', OrderController::class);
+    Route::post('orders/{order}/pay', [OrderController::class, 'pay']);
     Route::apiResource('/medias', MediaController::class);
     Route::prefix('entities/media')->group(function () {
         Route::post('attach', [EntityMediaController::class, 'attach']);
