@@ -39,10 +39,16 @@ class StoreProductRequest extends FormRequest
                 'string',
                 'max:1000',
             ],
-            'price' => [
+            'purchase_price' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+            'sale_price' => [
                 'required',
                 'numeric',
                 'min:0.01',
+                'gt:purchase_price',
             ],
             'stock' => [
                 'required',
