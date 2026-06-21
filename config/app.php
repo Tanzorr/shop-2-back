@@ -99,6 +99,19 @@ return [
 
     'key' => env('APP_KEY'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Shared JWT Secret (cross-service)
+    |--------------------------------------------------------------------------
+    |
+    | HS256 secret used to sign the JWT issued at login. The very same secret is
+    | configured in the Symfony "warehouses" service so a single token issued by
+    | Laravel is validated locally by both back-ends (see plan 11).
+    |
+    */
+
+    'jwt_shared_secret' => env('JWT_SHARED_SECRET'),
+
     'previous_keys' => [
         ...array_filter(
             explode(',', env('APP_PREVIOUS_KEYS', ''))
