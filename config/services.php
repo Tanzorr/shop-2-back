@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'warehouses' => [
+        'url'    => env('WAREHOUSES_URL', 'http://localhost:8001'),
+        'secret' => env('WAREHOUSES_WEBHOOK_SECRET'),
+    ],
+
 ];

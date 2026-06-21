@@ -14,7 +14,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('jwt')->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::apiResource('users', UserController::class)->only(['destroy', 'store', 'update']);
     });
@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('annual-user-report/{userId}', [ProfitReportController::class, 'getAnnualUsersSpend']);
 
     Route::apiResource('orders', OrderController::class);
+    Route::post('orders/{order}/pay', [OrderController::class, 'pay']);
     Route::apiResource('/medias', MediaController::class);
     Route::prefix('entities/media')->group(function () {
         Route::post('attach', [EntityMediaController::class, 'attach']);
